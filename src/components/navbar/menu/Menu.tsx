@@ -1,22 +1,49 @@
-import { navbar } from "@/lib/data";
-import Link from "next/link";
-import React from "react";
+import { filters } from "@/lib/data";
+import { useState } from "react";
 
-const Menu = () => {
-	return (
-		<div className=" w-[200px] bg-gray-600 min-h-[100vh] text-white py-20 p-2">
-			<div className="gap-6    w-full flex flex-col">
-				{navbar.map((el, index) => (
-					<Link
-						key={index}
-						href={el.href}
-						className="text-[18px] text-white  font-[400]">
-						{el.name}
-					</Link>
-				))}
-			</div>
-		</div>
-	);
-};
+export default function Menu() {
+  const [openSections, setOpenSections] = useState<string | null>(
+    filters[0].title
+  );
 
-export default Menu;
+  const toggleSection = (title: string) => {
+    setOpenSections((prev) => (prev === title ? null : title));
+  };
+
+  return (
+    <div className="min-w-[200px] bg-[#e7e6e6] min-h-[100vh] text-black   md:flex hidden p-2 ">
+      <div className="gap-3 w-full flex flex-col">
+        {filters.map((filter) => {
+          const isOpen = openSections === filter.title;
+          return (
+            <div key={filter.title}>
+              <div
+                className={`rounded-[6px] px-2 py-1 text-gray-800  flex items-center gap-3 cursor-pointer ${
+                  isOpen ? "bg-[#cfcfcf]" : "bg-transparent"
+                }`}
+                onClick={() => toggleSection(filter.title)}
+              >
+                <h1 className="font-normal text-[22px]">{filter.icon} </h1>
+                <h1 className="font-normal leading-[20px] text-[16px]">
+                  {filter.title}
+                </h1>
+              </div>
+              {isOpen && (
+                <ul className="px-3 py-1 space-y-1">
+                  {filter.options.map((option) => (
+                    <li key={option}>
+                      <label className="flex items-center gap-2 font-normal text-[14px] text-gray-700">
+                        <input type="checkbox" />
+                        {option}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
