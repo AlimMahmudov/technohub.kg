@@ -12,20 +12,20 @@ export const navbar = [
     name: "Главное",
   },
   {
-    href: PAGE.HOME,
+    href: PAGE.ABOUT,
     name: "О нас",
   },
   {
-    href: PAGE.HOME,
-    name: "Оплата",
-  },
-  {
-    href: PAGE.HOME,
+    href: PAGE.DELIVERY,
     name: "Доставка",
   },
   {
-    href: PAGE.HOME,
+    href: PAGE.GARANTEE,
     name: "Гарантия",
+  },
+  {
+    href: PAGE.CONTACT,
+    name: "Контакты",
   },
 ];
 
