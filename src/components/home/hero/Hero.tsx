@@ -47,7 +47,7 @@ const Hero = () => {
             {open && (
               <div
                 ref={ref}
-                className="absolute right-0 mt-2 w-[200px] bg-white border border-gray-200 shadow-md rounded-[10px] z-50 p-3 text-sm"
+                className="absolute md:right-0 mt-2 w-[200px] bg-white border border-gray-200 shadow-md rounded-[10px] z-50 p-3 text-sm"
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-semibold">Сортировка</span>
@@ -121,10 +121,10 @@ const Hero = () => {
                 <div className="">
                   <div className="w-full h-[1px] bg-gray-300"></div>
                   <div className="flex gap-1 mt-1">
-                    <button className="w-full p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
+                    <button className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
                       В корзину
                     </button>
-                    <button className="w-[20%] flex justify-center items-center mt-2 bg-black text-white rounded-[10px]">
+                    <button className="w-[20%] py-2 flex justify-center items-center mt-2 bg-black text-white rounded-[10px]">
                       <FaHeart />
                     </button>
                   </div>

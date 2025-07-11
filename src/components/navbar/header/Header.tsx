@@ -8,8 +8,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { navbar } from "@/lib/data";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
-import { PHONE_NUMBER } from "@/constants/admin";
-import { FaPhoneAlt } from "react-icons/fa";
+import { RiUserLine } from "react-icons/ri";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +36,7 @@ const Header = () => {
                 href={PAGE.HOME}
                 className="text-[#999999]  text-[24px] w-full  text-center md:text-start "
               >
-                TEHNOHUB
+                TECHNOHUB
               </Link>
 
               <div className="md:flex hidden gap-6 justify-center  w-full">
@@ -59,13 +58,9 @@ const Header = () => {
                 <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
                   <IoCartOutline />
                 </button>
-                <Link href={`tel:${PHONE_NUMBER}`}>
-                  <button className="text-white md:flex hidden text-[18px] bg-[#64646469] p-1 px-2   justify-center items-center gap-2 rounded-[6px] border border-[#747474]">
-                    <FaPhoneAlt />
-                    {""}
-                    {PHONE_NUMBER}
-                  </button>
-                </Link>
+                <button className="text-white md:flex hidden text-[14px] bg-[#64646469] p-1 px-2   justify-center items-center gap-2 rounded-[6px]">
+                  Войти <RiUserLine size={16} />
+                </button>
               </div>
             </div>
           </div>
