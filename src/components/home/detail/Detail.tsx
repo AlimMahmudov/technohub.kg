@@ -8,15 +8,15 @@ import { FaArrowLeft } from "react-icons/fa";
 const Detail = () => {
   return (
     <div className="container">
-      <div className="w-full py-5 px-5 mt-[20px] flex flex-col gap-4">
+      <div className="w-full py-5 md:px-5 px-0 mt-[20px] flex flex-col gap-4">
         <h1 className=" flex items-center gap-1 text-[20px] font-[600]">
           <FaArrowLeft />
           Объекты
           <span className="font-[100]">/ Об объекте</span>
         </h1>
         <div className="w-full mt-3 flex md:flex-row flex-col gap-4">
-          <div className="w-full h-[500px] flex flex-col gap-1 bg-white rounded-[10px] border border-gray-200 p-3 shadow-md">
-            <div className="w-full h-full rounded-[10px] overflow-hidden">
+          <div className="w-full h-full flex flex-col gap-1 bg-white rounded-[10px] border border-gray-200 p-3 shadow-md">
+            <div className="w-full h-[280px] md:h-full rounded-[10px] overflow-hidden">
               <Image
                 className="object-cover w-full h-full"
                 src={laptop}
@@ -71,10 +71,10 @@ const Detail = () => {
               <div className="flex flex-col gap-1">
                 <div className="w-full h-[1px] bg-slate-400"></div>
                 <div className="flex gap-2 mt-2">
-                  <button className="py-2 px-5 rounded-[10px] w-full  border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white">
+                  <button className="py-2 px-1 rounded-[10px] w-full  border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white">
                     <MdFavoriteBorder />В понравившие
                   </button>
-                  <button className="py-2 px-5 rounded-[10px] w-full  border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white">
+                  <button className="py-2 px-1 rounded-[10px] w-full  border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white">
                     <IoCartOutline /> Купить
                   </button>
                 </div>
