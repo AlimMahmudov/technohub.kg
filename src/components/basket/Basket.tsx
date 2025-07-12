@@ -31,12 +31,12 @@ const Basket = () => {
                   <h1 className="w-full text-[20px] font-[600]">{el.text}</h1>
                 </div>
 
-                <div className="md:w-[40%] w-full flex items-center">
+                <div className="md:w-[40%] mt-2 md:mt-0 w-full flex items-center">
                   <div className="flex items-center w-full justify-between gap-1">
                     <h2 className="flex text-[18px] font-[600] text-black">
                       {el.price} сом
                     </h2>
-                    <div className="flex text-[18px] gap-1 font-[600] bg-gray-200 rounded-[10px]">
+                    <div className="flex py-1 text-[18px] gap-1 font-[600] bg-gray-200 rounded-[10px]">
                       <button className="px-2">+</button>
                       <div className="px-2">10</div>
                       <button className="px-2">-</button>
@@ -56,7 +56,7 @@ const Basket = () => {
         </div>
       </div>
       <div className="w-full flex justify-center py-2 md:px-5 mb-5 px-0">
-        <div className="flex flex-col items-center rounded-[10px] w-[60%] h-full gap-2 bg-white border border-gray-200 p-3 shadow-md">
+        <div className="flex flex-col items-center rounded-[10px] md:w-[60%] w-[100%] h-full gap-2 bg-white border border-gray-200 p-3 shadow-md">
           <h1 className="text-[23px] font-semibold">
             Заполните пожалуйста Ваши данные для заказа
           </h1>

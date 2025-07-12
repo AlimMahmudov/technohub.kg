@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
-import { FaChevronLeft, FaChevronRight, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const Hero = () => {
   const { card } = useCard();
@@ -132,29 +132,6 @@ const Hero = () => {
               </div>
             </Link>
           ))}
-        </div>
-      </div>
-
-      <div className="w-full p-5">
-        <div className="flex items-center justify-center gap-1">
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-gray-300">
-            <FaChevronLeft />
-          </button>
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border bg-blue-500 text-white border-gray-300">
-            1
-          </button>
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-gray-300">
-            2
-          </button>
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-gray-300">
-            ...
-          </button>
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-gray-300">
-            5
-          </button>
-          <button className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-gray-300">
-            <FaChevronRight />
-          </button>
         </div>
       </div>
     </div>
