@@ -6,7 +6,7 @@ import BurgerMenu from "./BurgerMenu";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { navbar } from "@/lib/data";
-import { MdFavoriteBorder } from "react-icons/md";
+// import { MdFavoriteBorder } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
 
@@ -52,9 +52,9 @@ const Header = () => {
               </div>
 
               <div className="flex gap-2 w-full justify-end  ">
-                <button className="text-white bg-[#64646469] px-2 p-2 text-[20px] rounded-[6px]">
+                {/* <button className="text-white bg-[#64646469] px-2 p-2 text-[20px] rounded-[6px]">
                   <MdFavoriteBorder />
-                </button>
+                </button> */}
                 <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
                   <Link href="/basket">
                     <IoCartOutline />
