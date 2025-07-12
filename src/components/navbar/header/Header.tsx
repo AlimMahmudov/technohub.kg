@@ -56,7 +56,9 @@ const Header = () => {
                   <MdFavoriteBorder />
                 </button>
                 <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
-                  <IoCartOutline />
+                  <Link href="/basket">
+                    <IoCartOutline />
+                  </Link>
                 </button>
                 <button className="text-white md:flex hidden text-[14px] bg-[#64646469] p-1 px-2   justify-center items-center gap-2 rounded-[6px]">
                   Войти <RiUserLine size={16} />
