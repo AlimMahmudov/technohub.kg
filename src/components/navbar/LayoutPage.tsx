@@ -11,9 +11,9 @@ const LayoutPage: FC<LayoutPageProps> = ({ children }) => {
   return (
     <div className="flex flex-col justify-between min-h-[100vh] bg-[#f3f2f2]">
       <Header />
-      <div className="flex">
+      <div className="flex w-full">
         <Menu />
-        <main className="w-full bg-[#f3f2f2]">{children}</main>
+        <main className="w-full md:w-[80%] bg-[#f3f2f2]">{children}</main>
       </div>
     </div>
   );

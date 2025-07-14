@@ -6,7 +6,6 @@ import BurgerMenu from "./BurgerMenu";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { navbar } from "@/lib/data";
-// import { MdFavoriteBorder } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
 
@@ -19,7 +18,7 @@ const Header = () => {
 
   return (
     <header className="w-full  bg-transparent ">
-      <div className="   flex items-center z-50 w-full h-[60px] bg-[#141414]">
+      <div className="flex items-center z-50 w-full h-[60px] bg-[#141414]">
         <div className="container">
           <div className="flex justify-between py-2 items-center">
             <div className="flex items-center  justify-between   w-full">
@@ -52,16 +51,15 @@ const Header = () => {
               </div>
 
               <div className="flex gap-2 w-full justify-end  ">
-                {/* <button className="text-white bg-[#64646469] px-2 p-2 text-[20px] rounded-[6px]">
-                  <MdFavoriteBorder />
-                </button> */}
                 <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
                   <Link href="/basket">
                     <IoCartOutline />
                   </Link>
                 </button>
                 <button className="text-white md:flex hidden text-[14px] bg-[#64646469] p-1 px-2   justify-center items-center gap-2 rounded-[6px]">
-                  Войти <RiUserLine size={16} />
+                  <Link className="flex items-center gap-1" href="/register">
+                    Войти <RiUserLine size={16} />
+                  </Link>
                 </button>
               </div>
             </div>

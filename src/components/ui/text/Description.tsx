@@ -12,7 +12,7 @@ export function Description({ children, className, ...props }: Props) {
     <h1
       {...props}
       className={twMerge(
-        "md:text-[14px] text-[14px] font-[400] leading-[140%] text-black",
+        "md:text-[16px] text-[16px] font-[400] leading-[140%] text-gray-600",
         className
       )}
     >

@@ -5,6 +5,8 @@ import instagram from "@/shared/image/instagram.svg";
 import telegram from "@/shared/image/telegram.svg";
 import gmail from "@/shared/image/gmail.svg";
 import Image from "next/image";
+import { Title } from "../ui/text/Title";
+import { TitleComponent } from "../ui/text/TitleComponent";
 
 const Contact = () => {
   return (
@@ -13,16 +15,14 @@ const Contact = () => {
         <div className="container">
           <div className="w-full py-2 md:px-5 px-0">
             <div className="p-3 mt-[14px]">
-              <h1 className="text-[23px] font-semibold">
-                Контакты Technohub.kg в Бишкеке, Кыргызстане
-              </h1>
+              <Title>Контакты Technohub.kg в Бишкеке, Кыргызстане</Title>
             </div>
           </div>
           <div className="w-full py-2 md:px-5 px-0">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="w-full h-full rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3 shadow-md">
                 <div className="w-full flex flex-col items-center">
-                  <h1 className="text-[23px] font-semibold">Оставьте заявку</h1>
+                  <TitleComponent>Оставьте заявку</TitleComponent>
                   <p className="text-gray-500">
                     Наши менеджеры свяжутся с вами в ближайшее время
                   </p>
@@ -54,19 +54,19 @@ const Contact = () => {
               </div>
               <div className="w-full flex flex-col gap-1">
                 <div className="w-full flex flex-col gap-1 rounded-[10px] p-3">
-                  <h1 className=" text-[20px] font-[600]">Адрес офиса:</h1>
+                  <TitleComponent>Адрес офиса:</TitleComponent>
                   <p>Бишкек, Куренкеева 138</p>
                 </div>
 
                 <div className="w-full flex flex-col gap-1 rounded-[10px] p-3">
-                  <h1 className=" text-[20px] font-[600]">График работы:</h1>
+                  <TitleComponent>График работы:</TitleComponent>
                   <p>Понедельник - Воскресенье: 09:00 - 21:00</p>
                   <p>обед: 12:00 - 14:00</p>
                   <p>Пятница: Выходной</p>
                 </div>
 
                 <div className="w-full flex flex-col gap-1 rounded-[10px] p-3">
-                  <h1 className="text-[20px] font-[600]">Наши контакты:</h1>
+                  <TitleComponent>Наши контакты:</TitleComponent>
                   <button className="flex items-center gap-2">
                     <LuPhone /> +996 704 000 000
                   </button>

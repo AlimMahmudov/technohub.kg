@@ -12,7 +12,7 @@ export function TitleComponent({ children, className, ...props }: Props) {
     <h1
       {...props}
       className={twMerge(
-        "md:text-[18px] text-[16px] font-[600] leading-[120%] text-black",
+        "md:text-[20px] text-[16px] font-[600] leading-[120%] text-black",
         className
       )}
     >

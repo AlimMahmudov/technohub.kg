@@ -24,6 +24,14 @@ body {
   padding: 0 10px;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .map {
   iframe {
     width: 100%;
