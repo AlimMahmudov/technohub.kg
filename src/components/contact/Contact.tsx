@@ -15,7 +15,7 @@ const Contact = () => {
         <div className="container">
           <div className="w-full py-2 md:px-5 px-0">
             <div className="p-3 mt-[14px]">
-              <Title>Контакты Technohub.kg в Бишкеке, Кыргызстане</Title>
+              <Title>Контакты Technohub.kg</Title>
             </div>
           </div>
           <div className="w-full py-2 md:px-5 px-0">
@@ -83,11 +83,11 @@ const Contact = () => {
               <div className="flex flex-wrap gap-4">
                 <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={whatsapp} alt="img" />
-                  <h1>Instagram</h1>
+                  <h1>Whatsapp</h1>
                 </div>
                 <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={telegram} alt="img" />
-                  <h1>Instagram</h1>
+                  <h1>Telegram</h1>
                 </div>
                 <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={instagram} alt="img" />
@@ -95,7 +95,7 @@ const Contact = () => {
                 </div>
                 <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={gmail} alt="img" />
-                  <h1>Instagram</h1>
+                  <h1>Email</h1>
                 </div>
               </div>
             </div>

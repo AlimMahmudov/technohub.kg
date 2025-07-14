@@ -3,7 +3,6 @@ import { useCard } from "@/components/ui/card/Card";
 import { Description } from "@/components/ui/text/Description";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart } from "react-icons/fa";
 
 const Discount = () => {
   const { discount } = useCard();
@@ -16,7 +15,13 @@ const Discount = () => {
         </div>
       </div>
       <div className="w-full py-5 md:px-5 px-0">
-        <div className="flex overflow-x-auto gap-[10px] w-full pb-2 scroll-smooth scroll-snap-x">
+        <div
+          className="flex overflow-x-auto gap-[10px] w-full pb-2 scroll-smooth scroll-snap-x"
+          style={{
+            scrollbarWidth: "none", // для Firefox
+            msOverflowStyle: "none", // для IE и Edge
+          }}
+        >
           {discount.map((el) => (
             <div
               key={el.id}
@@ -24,15 +29,23 @@ const Discount = () => {
             >
               <Link
                 href={`/detail/${el.id}`}
-                className="relative flex justify-start w-full h-[240px] rounded-[10px] overflow-hidden"
+                className="relative flex justify-end w-full h-[240px] rounded-[10px] overflow-hidden"
               >
                 <Image
                   className="object-cover w-full h-full"
                   src={el.image}
                   alt="product"
                 />
-                <div className="absolute mt-2 ml-2 px-2 rounded-[10px] bg-red-500 text-white text-[18px] font-[600]">
-                  <h1 className="flex items-center">{el.procent}%</h1>
+                <div
+                  className="w-[50px] flex justify-center items-center h-[200px] mt-[-50px] ml-[-40px] absolute px-2 bg-red-600 text-white text-[18px] font-[600]"
+                  style={{ transform: "rotate(-45deg)" }}
+                >
+                  <h1
+                    className="flex items-center mt-[-40px] text-[20px]"
+                    style={{ transform: "rotate(45deg)" }}
+                  >
+                    {el.procent}%
+                  </h1>
                 </div>
               </Link>
 
@@ -64,9 +77,6 @@ const Discount = () => {
                 <div className="flex gap-1 mt-1">
                   <button className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
                     В корзину
-                  </button>
-                  <button className="w-[20%] py-2 flex justify-center items-center mt-2 bg-black text-white rounded-[10px]">
-                    <FaHeart />
                   </button>
                 </div>
               </div>

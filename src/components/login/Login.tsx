@@ -7,7 +7,7 @@ import { Description } from "../ui/text/Description";
 const Login = () => {
   return (
     <div className="container">
-      <div className="w-full py-2 md:px-5 px-0">
+      <div className="flex justify-center w-full py-2 md:px-5 px-0">
         <div className="p-0 mt-[14px]">
           <Title>
             <Link href="/">Technohub.kg</Link>
@@ -17,10 +17,12 @@ const Login = () => {
       <div className="w-full flex justify-center md:px-5 px-0 mt-4">
         <div className="md:w-[40%] w-full flex flex-col items-center md:px-5 py-2 p-2 gap-5 rounded-[10px] border border-gray-300 shadow-md">
           <div className="w-full flex flex-col gap-2 items-center text-center">
-            <TitleComponent>Введите номер Войти</TitleComponent>
+            <TitleComponent className="text-[20px]">
+              Войдите в свой аккаунт
+            </TitleComponent>
             <Description>
-              Мы отправим код или позвоним. Отвечать на звонок не нужно. Код
-              может прийти на почту или в СМС
+              Введите свои данные для входа или перейдите к регистрации, если у
+              вас ещё нет аккаунта.
             </Description>
           </div>
           <div className="w-full flex flex-col gap-3">

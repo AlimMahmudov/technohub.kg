@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
-import { FaHeart } from "react-icons/fa";
 
 const Hero = () => {
   const { card } = useCard();
@@ -126,9 +125,6 @@ const Hero = () => {
                 <div className="flex gap-1 mt-1">
                   <button className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
                     В корзину
-                  </button>
-                  <button className="w-[20%] py-2 flex justify-center items-center mt-2 bg-black text-white rounded-[10px]">
-                    <FaHeart />
                   </button>
                 </div>
               </div>
