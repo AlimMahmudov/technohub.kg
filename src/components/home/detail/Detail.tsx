@@ -89,7 +89,7 @@ const Detail = () => {
                   </p>
                   <h2>
                     <span className="text-gray-500">Гарантия:</span>{" "}
-                    {el.garantee} месяцев
+                    {el.garantee} ме
                   </h2>
                   <Description className="text-gray-600">
                     {el.description}
