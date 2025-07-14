@@ -7,12 +7,12 @@ interface Props extends HTMLAttributes<HTMLHeadingElement> {
   children: ReactNode;
 }
 
-export function Title({ children, className, ...props }: Props) {
+export function Name({ children, className, ...props }: Props) {
   return (
     <h1
       {...props}
       className={twMerge(
-        "md:text-[28px] text-[24px] font-[700] leading-[120%] text-black",
+        "md:text-[14px] text-[14px] font-[400] leading-[140%] text-black",
         className
       )}
     >

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useCard } from "../ui/card/Card";
+import { Title } from "../ui/text/Title";
 
 const Basket = () => {
   const { card } = useCard();
@@ -9,7 +10,7 @@ const Basket = () => {
     <div className="container">
       <div className="w-full py-2 md:px-5 px-0">
         <div className="p-3 mt-[14px]">
-          <h1 className="text-[23px] font-semibold">Корзина</h1>
+          <Title>Корзина</Title>
         </div>
       </div>
       <div className="w-full py-5 md:px-5 px-0">

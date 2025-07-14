@@ -3,17 +3,14 @@ import React from "react";
 import laptop from "@/shared/image/laptop.jpeg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
-import { FaArrowLeft } from "react-icons/fa";
+import { Title } from "@/components/ui/text/Title";
+import { Description } from "@/components/ui/text/Description";
 
 const Detail = () => {
   return (
     <div className="container">
       <div className="w-full py-5 md:px-5 px-0 mt-[20px] flex flex-col gap-4">
-        <h1 className=" flex items-center gap-1 text-[20px] font-[600]">
-          <FaArrowLeft />
-          Объекты
-          <span className="font-[100]">/ Об объекте</span>
-        </h1>
+        <Title>Подробнее о ноутбуке</Title>
         <div className="w-full mt-3 flex md:flex-row flex-col gap-4">
           <div className="w-full h-full flex flex-col gap-1 bg-white rounded-[10px] border border-gray-200 p-3 shadow-md">
             <div className="w-full h-[280px] md:h-full rounded-[10px] overflow-hidden">
@@ -56,17 +53,17 @@ const Detail = () => {
                 <h1 className=" text-[24px]">
                   Ноутбук Acer Aspire Lite AL16-52P-31UT Intel
                 </h1>
-                <h2 className=" text-[18px]">
+                <p className="text-[16px]">
                   <span className="text-gray-500">Цена:</span> 45200 сом
-                </h2>
+                </p>
                 <h2>
                   <span className="text-gray-500">Гарантия:</span> 12 месяцев
                 </h2>
-                <p className=" text-gray-600">
+                <Description className=" text-gray-600">
                   16&quot; IPS 1920x1200; процессор Intel Core i3-1305U;
                   оперативная память 64GB DDR5; накопитель 256GB SSD NVMe;
                   видеокарта Intel Graphics; без ОС
-                </p>
+                </Description>
               </div>
               <div className="flex flex-col gap-1">
                 <div className="w-full h-[1px] bg-slate-400"></div>
