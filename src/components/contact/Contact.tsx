@@ -21,7 +21,7 @@ const Contact = () => {
           <div className="w-full py-2 md:px-5 px-0">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="w-full h-full rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3 shadow-md">
-                <div className="w-full flex flex-col items-center">
+                <div className="w-full flex text-center flex-col items-center">
                   <TitleComponent>Оставьте заявку</TitleComponent>
                   <p className="text-gray-500">
                     Наши менеджеры свяжутся с вами в ближайшее время
@@ -81,19 +81,19 @@ const Contact = () => {
           <div className="w-full py-2 md:px-5 px-0">
             <div className="w-full flex flex-col gap-3 p-3">
               <div className="flex flex-wrap gap-4">
-                <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
+                <div className="flex items-center md:w-[180px] w-[47%] rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={whatsapp} alt="img" />
                   <h1>Whatsapp</h1>
                 </div>
-                <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
+                <div className="flex items-center md:w-[180px] w-[47%] rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={telegram} alt="img" />
                   <h1>Telegram</h1>
                 </div>
-                <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
+                <div className="flex items-center md:w-[180px] w-[47%] rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={instagram} alt="img" />
                   <h1>Instagram</h1>
                 </div>
-                <div className=" flex items-center rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
+                <div className="flex items-center md:w-[180px] w-[47%] rounded-[10px] gap-2 text-[18px] font-[600] bg-white border border-gray-200 p-2 shadow-md">
                   <Image className="w-[40px]" src={gmail} alt="img" />
                   <h1>Email</h1>
                 </div>
