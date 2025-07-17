@@ -1,6 +1,8 @@
 import React from "react";
 import { Title } from "../ui/text/Title";
 import { TitleComponent } from "../ui/text/TitleComponent";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { PiTelegramLogo } from "react-icons/pi";
 
 const Contact = () => {
   return (
@@ -35,8 +37,18 @@ const Contact = () => {
                   </div>
 
                   <div className="flex flex-col gap-1 px-3">
-                    <TitleComponent>Адрес офиса:</TitleComponent>
-                    <p>Бишкек, Куренкеева 138</p>
+                    <TitleComponent>Адрес офиса</TitleComponent>
+                    <div className="flex gap-2 text-[22px]">
+                      <button>
+                        <FaWhatsapp />
+                      </button>
+                      <button>
+                        <FaInstagram />
+                      </button>
+                      <button>
+                        <PiTelegramLogo />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
