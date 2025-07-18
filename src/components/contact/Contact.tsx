@@ -15,7 +15,7 @@ const Contact = () => {
         <div className="container">
           <div className="w-full py-2 md:px-5 px-0">
             <div className="p-3 mt-[14px]">
-              <Title>Контакты Technohub.kg</Title>
+              <Title>свяжитесь с нами</Title>
             </div>
           </div>
           <div className="w-full py-2 md:px-5 px-0">
