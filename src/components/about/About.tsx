@@ -19,11 +19,13 @@ const About = () => {
       </div>
       <div className="w-full py-2 md:px-5 px-0">
         <div className="w-full flex flex-col gap-3 p-3">
-          <div className="w-full h-[280px] md:h-[280px] rounded-[10px] overflow-hidden">
+          <div className="w-full h-[280px] md:h-[300px] rounded-[10px] overflow-hidden">
             <Image
               className="object-cover w-full h-full"
               src={about_image}
               alt="product"
+              quality={100} // Максимальное качество (по умолчанию 75)
+              placeholder="blur" // Размытие при загрузке (если поддерживается)
             />
           </div>
         </div>

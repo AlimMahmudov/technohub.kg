@@ -126,7 +126,17 @@ const Detail = () => {
                     <span className="text-gray-500">ОС:</span> нет
                   </p>
                 </div>
-
+                <div>
+                  <h1 className="text-[16px] font-[600]">Память</h1>
+                  <p className="text-[16px]">
+                    <span className="text-gray-500">Оперативная память:</span>
+                    64GB DDR5
+                  </p>
+                  <p>
+                    <span className="text-gray-500">Накопительная память:</span>
+                    256GB SSD NVMe
+                  </p>
+                </div>
                 <div>
                   <h1 className="text-[16px] font-[600]">Процессор</h1>
                   <p className="text-[16px]">
@@ -143,7 +153,6 @@ const Detail = () => {
                     <span className="text-gray-500">Кэш:</span> 10 Мб
                   </p>
                 </div>
-
                 <div>
                   <h1 className="text-[16px] font-[600]">Видеокарта</h1>
                   <p className="text-[16px]">
@@ -154,7 +163,6 @@ const Detail = () => {
                     <span className="text-gray-500">Видео память:</span> SMA
                   </p>
                 </div>
-
                 <div>
                   <h1 className="text-[16px] font-[600]">Интерфейсы и порты</h1>
                   <p className="text-[16px]">3 x USB Type-A</p>
@@ -162,7 +170,6 @@ const Detail = () => {
                   <p className="text-[16px]">1 x HDMI</p>
                   <p className="text-[16px]">1 x Audio 3.5 мм</p>
                 </div>
-
                 <div>
                   <h1 className="text-[16px] font-[600]">
                     Дополнительные спецификации
@@ -181,7 +188,6 @@ const Detail = () => {
                     <span className="text-gray-500">Батарея:</span> 58 ВтЧ
                   </p>
                 </div>
-
                 <div>
                   <h1 className="text-[16px] font-[600]">
                     Физические параметры
