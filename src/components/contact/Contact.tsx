@@ -3,6 +3,7 @@ import { Title } from "../ui/text/Title";
 import { TitleComponent } from "../ui/text/TitleComponent";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { PiTelegramLogo } from "react-icons/pi";
+import Link from "next/link";
 
 const Contact = () => {
   return (
@@ -40,13 +41,19 @@ const Contact = () => {
                     <TitleComponent>Адрес офиса</TitleComponent>
                     <div className="flex gap-2 text-[22px]">
                       <button>
-                        <FaWhatsapp />
+                        <Link href="https://wa.me/773400551">
+                          <FaWhatsapp />
+                        </Link>
                       </button>
                       <button>
-                        <FaInstagram />
+                        <Link href="https://www.instagram.com/technohub_kg/">
+                          <FaInstagram />
+                        </Link>
                       </button>
                       <button>
-                        <PiTelegramLogo />
+                        <Link href="https://t.me/Sheikh_Sarybaev">
+                          <PiTelegramLogo />
+                        </Link>
                       </button>
                     </div>
                   </div>
