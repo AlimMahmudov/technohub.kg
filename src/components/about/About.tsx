@@ -24,8 +24,8 @@ const About = () => {
               className="object-cover w-full h-full"
               src={about_image}
               alt="product"
-              quality={100} // Максимальное качество (по умолчанию 75)
-              placeholder="blur" // Размытие при загрузке (если поддерживается)
+              quality={100}
+              placeholder="blur"
             />
           </div>
         </div>

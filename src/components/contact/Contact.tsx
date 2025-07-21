@@ -41,17 +41,23 @@ const Contact = () => {
                     <TitleComponent>Адрес офиса</TitleComponent>
                     <div className="flex gap-2 text-[22px]">
                       <button>
-                        <Link href="https://wa.me/773400551">
+                        <Link target="_blank" href="https://wa.me/773400551">
                           <FaWhatsapp />
                         </Link>
                       </button>
                       <button>
-                        <Link href="https://www.instagram.com/technohub_kg/">
+                        <Link
+                          target="_blank"
+                          href="https://www.instagram.com/technohub_kg/"
+                        >
                           <FaInstagram />
                         </Link>
                       </button>
                       <button>
-                        <Link href="https://t.me/Sheikh_Sarybaev">
+                        <Link
+                          target="_blank"
+                          href="https://t.me/Sheikh_Sarybaev"
+                        >
                           <PiTelegramLogo />
                         </Link>
                       </button>

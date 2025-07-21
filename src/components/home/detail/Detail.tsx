@@ -98,7 +98,8 @@ const Detail = () => {
                   <h2>
                     <span className="text-gray-500">Ссылка на видео: </span>
                     <Link
-                      className=" text-blue-600"
+                      target="_blank"
+                      className=" text-blue-500"
                       href="https://www.instagram.com/p/DDAS6prsbe-/?img_index=1"
                     >
                       https://www.instagram.com/
