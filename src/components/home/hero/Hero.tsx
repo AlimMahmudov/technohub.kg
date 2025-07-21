@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
+// import { FaHeart } from "react-icons/fa";
 
 const Hero = () => {
   const { card } = useCard();
@@ -126,6 +127,9 @@ const Hero = () => {
                   <button className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
                     В корзину
                   </button>
+                  {/* <button className="w-[15%] flex items-center justify-center py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
+                    <FaHeart />
+                  </button> */}
                 </div>
               </div>
             </div>

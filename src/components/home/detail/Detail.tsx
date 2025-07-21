@@ -7,6 +7,7 @@ import { Description } from "@/components/ui/text/Description";
 import { useCard } from "@/components/ui/card/Card";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import Link from "next/link";
 
 const Detail = () => {
   const { detail } = useCard();
@@ -94,6 +95,16 @@ const Detail = () => {
                     <span className="text-gray-500">Гарантия:</span>{" "}
                     {el.garantee} месяцев
                   </h2>
+                  <h2>
+                    <span className="text-gray-500">Ссылка на видео: </span>
+                    <Link
+                      className=" text-blue-600"
+                      href="https://www.instagram.com/p/DDAS6prsbe-/?img_index=1"
+                    >
+                      https://www.instagram.com/
+                    </Link>
+                  </h2>
+
                   <Description className="text-gray-600">
                     {el.description}
                   </Description>
