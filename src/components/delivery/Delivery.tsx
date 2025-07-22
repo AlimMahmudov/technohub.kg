@@ -1,140 +1,53 @@
-import React from "react";
-import { Title } from "../ui/text/Title";
-import { TitleComponent } from "../ui/text/TitleComponent";
-import { Description } from "../ui/text/Description";
+"use client";
+import { useEffect } from "react";
+import { useGetDeliveryQuery } from "@/redux/api/text";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import TextSkeleton from "../skeleton/TextSkeleton";
+
+const BASE_URL = process.env.NEXT_PUBLIC_API || "";
 
 const Delivery = () => {
-  return (
-    <div className="container">
-      <div className="w-full py-2 md:px-5 px-0">
-        <div className="p-3 mt-[14px]">
-          <Title> Доставка курьером по г. Бишкек</Title>
-        </div>
-      </div>
-      <div className="w-full py-2 md:px-5 px-0">
-        <div className="w-full flex flex-col gap-3 p-3">
-          <TitleComponent>Стоимость услуг:</TitleComponent>
-          <Description>
-            Доставка заказов стоимостью свыше 2500 сом, по г. Бишкек* -
-            бесплатная (в пределах 10 км вкл. от офиса) Доставка заказов
-            стоимостью до 2500 сом, по г. Бишкек - 199 сом
-          </Description>
-          <Description>
-            Доставка крупногабаритных** товаров, по г. Бишкек* - бесплатная (в
-            пределах 10 км вкл. от офиса)
-          </Description>
-          <Description>Экспресс-доставка по г. Бишкек - 299 сом</Description>
-          <Description>
-            Доставка в пригород*** г. Бишкек* - 20 сом/км от офиса компании
-          </Description>
-          <Description>
-            Возврат, обмен, разъезды по гарантии курьером по г. Бишкек: <br />
-            мелкогабаритные товары - 199 сом <br /> крупногабаритные товары -
-            499 сом
-          </Description>
-          <Description>
-            Отказ клиента от товара надлежащего качества при получении: <br />
-            мелкогабаритные товары - 199 сом <br /> крупногабаритные товары -
-            499 сом
-          </Description>
-        </div>
-      </div>
-      <div className="w-full py-2 md:px-5 px-0">
-        <div className="w-full flex flex-col gap-3 p-3">
-          <TitleComponent>Время доставки:</TitleComponent>
-          <Description>
-            Если заказ, свыше 2500 сом, сделан до 13:00, то товар доставляется в
-            течение дня (ориентировочно с 14:00 до 18:00). Если заказ, свыше
-            2500 сом, сделан после 13:00, то товар доставляется на следующий
-            день (либо в течение дня при отсутствии загруженности).
-          </Description>
-          <Description>
-            Заказы до 2500 сом доставляются в течение 1-3 дней.
-          </Description>
-          <Description>
-            Экспресс-доставка осуществляется в течение 180 минут. (В случае
-            загруженности курьерской службы и выбора определенной категории
-            товара, экспресс-доставка может быть не доступна)
-          </Description>
-        </div>
-      </div>
-      <div className="w-full py-2 md:px-5 px-0">
-        <div className="w-full flex flex-col gap-3 mb-10 p-3">
-          <TitleComponent>Условия оказания услуг:</TitleComponent>
-          <Description>
-            Курьер обязан при вас распаковать и показать товар, передать
-            квитанцию и гарантийный талон. Внимательно осмотрите товар и
-            проверьте комплектацию: ваша подпись свидетельствует об отсутствии
-            претензий.
-          </Description>
-          <Description>
-            Доставка крупногабаритного товара осуществляется бесплатно только до
-            подъезда многоквартирного дома.
-          </Description>
-          <Description>
-            Доставка товара осуществляется при наличии подъездных путей по
-            указанному в заказе адресу.
-          </Description>
-          <Description>
-            Курьер не осуществляет работы по переносу/разбору мебели и других
-            предметов.
-          </Description>
-          <Description>
-            Курьер не привозит товары для просмотра. У нас формат интернет
-            магазина, поэтому посмотреть и проверить товар можно только при
-            полной готовности к покупке и получении, заранее ознакомившись с
-            ним. Ознакомиться с товаром в живую возможно в сторонних магазинах
-            города (если знаете в каких именно), сравнить условия, цены и затем
-            принять решение о покупке. Советуем Вам перед заказом, более
-            подробнее, ознакомиться с товаром в интернете, изучив характеристики
-            (официальные сайты производителей), фото (Картинки Google),
-            видеообзоры (Youtube), отзывы (Яндекс Маркет).
-          </Description>
-          <Description>
-            Курьер не устанавливает товар и не консультирует по вопросам
-            технических параметров и функциональных особенностей товаров, их
-            совместимости, стоимости и т.п. Эту информацию Вы можете получить в
-            руководствах пользователя, интернете или у операторов call-центра.
-          </Description>
-          <Description>
-            Большинство технически сложных товаров требует до начала их
-            использования Вашего ознакомления с руководством по эксплуатации. В
-            зимнее время года передача товара сопряжена с резким изменением
-            температурного режима, поэтому немедленное включение электронной
-            техники является нарушением условий эксплуатации.
-          </Description>
-          <Description>
-            Мы не доставляем товары на улицы, подъезды, стройплощадки, в
-            садово-огородные товарищества, цеха, пункты общественного питания
-            (за исключением их административных помещений), режимные, секретные
-            объекты, в парки, лесные массивы или иные места, не имеющие
-            определенного адреса.
-          </Description>
-          <Description>
-            В случае если курьер сочтет место выгрузки товара небезопасным
-            (глухой неосвещенный тупик, безлюдный пустырь и т.п.), то он вправе
-            попросить покупателя переместиться в другое, более безопасное место.
-            Если покупатель категорически отказывается это сделать, курьер
-            вправе отказать покупателю в выгрузке товара и покинуть данный
-            адрес.
-          </Description>
-          <Description>
-            Курьер передает товар для проверки только после оплаты.
-          </Description>
-          <Description>
-            Оплата принимается только в офисных или жилых помещениях, а также в
-            автомобиле курьера.
-          </Description>
-          <Description>
-            Если курьер просит доплату за пронос товара из за отсутствия
-            подъездных путей, распаковку товара, установку и подключение товара,
-            а также при любых других нарушениях правил доставки, просим Вас не
-            соглашаться на доплату и сообщить в Контактный центр.
-          </Description>
-        </div>
-      </div>
-    </div>
-  );
+	const { data, isLoading } = useGetDeliveryQuery();
+
+	useEffect(() => {
+		Fancybox.bind('[data-fancybox="gallery"]', {});
+	}, [data]);
+
+	if (isLoading) {
+		return <TextSkeleton />;
+	}
+
+	const processedDescription = data?.[0]?.description?.replace(
+		/<img(.*?)src="\/media\/(.*?)"(.*?)>/g,
+		`<a data-fancybox="gallery" href="${BASE_URL}/media/$2"><img$1src="${BASE_URL}/media/$2"$3 class="custom-image" /></a>`
+	);
+
+	return (
+		<div className="container">
+			<div className="w-full h-full min-h-[100vh] py-2 md:px-5 px-0">
+				{processedDescription && (
+					<div dangerouslySetInnerHTML={{ __html: processedDescription }} />
+				)}
+			</div>
+
+			<style jsx global>{`
+				.custom-image {
+					max-width: 100%;
+					height: 400px;
+					object-fit: cover;
+					border-radius: 12px;
+					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+					margin-top: 1rem;
+					margin-bottom: 1rem;
+					transition: transform 0.3s ease;
+				}
+				.custom-image:hover {
+					transform: scale(1.02);
+				}
+			`}</style>
+		</div>
+	);
 };
 
 export default Delivery;
