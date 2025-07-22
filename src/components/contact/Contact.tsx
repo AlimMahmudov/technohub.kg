@@ -1,11 +1,14 @@
+"use client";
 import React from "react";
 import { Title } from "../ui/text/Title";
 import { TitleComponent } from "../ui/text/TitleComponent";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { PiTelegramLogo } from "react-icons/pi";
 import Link from "next/link";
+import { useGetContactQuery } from "@/redux/api/contact";
 
 const Contact = () => {
+  const { data } = useGetContactQuery();
   return (
     <>
       <section>
@@ -20,50 +23,51 @@ const Contact = () => {
                   </Title>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-                  <div className="flex flex-col items-start gap-1 px-3">
-                    <TitleComponent>Наши контакты</TitleComponent>
-                    <button>+996 704 000 000</button>
-                    <button>+996 704 000 000</button>
-                  </div>
+                {data?.map((el) => (
+                  <div
+                    key={el.id}
+                    className="grid grid-cols-2 md:grid-cols-2 gap-4"
+                  >
+                    <div className="flex flex-col items-start gap-1 px-3">
+                      <TitleComponent>Наши контакты</TitleComponent>
+                      <button>{el.phone_number[0]?.phone_number}</button>
+                    </div>
 
-                  <div className="flex flex-col gap-1 px-3">
-                    <TitleComponent>Адрес офиса</TitleComponent>
-                    <p>Бишкек, Куренкеева 138</p>
-                  </div>
+                    <div className="flex flex-col gap-1 px-3">
+                      <TitleComponent>Адрес офиса</TitleComponent>
+                      <p>{el.address}</p>
+                    </div>
 
-                  <div className="flex flex-col gap-1 px-3">
-                    <TitleComponent>Email</TitleComponent>
-                    <p>technohub@gmail.com</p>
-                  </div>
+                    <div className="flex flex-col gap-1 px-3">
+                      <TitleComponent>Email</TitleComponent>
+                      <p>{el.email}</p>
+                    </div>
 
-                  <div className="flex flex-col gap-1 px-3">
-                    <TitleComponent>Адрес офиса</TitleComponent>
-                    <div className="flex gap-2 text-[22px]">
-                      <button>
-                        <Link target="_blank" href="https://wa.me/773400551">
-                          <FaWhatsapp />
-                        </Link>
-                      </button>
-                      <button>
+                    <div className="flex flex-col gap-1 px-3">
+                      <TitleComponent>Соц. сети</TitleComponent>
+                      <div className="flex gap-2 text-[22px]">
                         <Link
                           target="_blank"
-                          href="https://www.instagram.com/technohub_kg/"
+                          href={el.whatsapp[0]?.whatsapp || "#"}
+                        >
+                          <FaWhatsapp />
+                        </Link>
+                        <Link
+                          target="_blank"
+                          href={el.instagram[0]?.instagram || "#"}
                         >
                           <FaInstagram />
                         </Link>
-                      </button>
-                      <button>
                         <Link
                           target="_blank"
-                          href="https://t.me/Sheikh_Sarybaev"
+                          href={el.telegram[0]?.telegram || "#"}
                         >
                           <PiTelegramLogo />
                         </Link>
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
               <div className="w-full h-full bg-white rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3">
                 <div className="w-full flex text-center flex-col items-center">
@@ -86,7 +90,7 @@ const Contact = () => {
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
                     type="text"
-                    placeholder="Эмайл"
+                    placeholder="Email"
                   />
                   <textarea
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
