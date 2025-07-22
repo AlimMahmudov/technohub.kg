@@ -67,7 +67,7 @@ const Contact = () => {
               </div>
               <div className="w-full h-full bg-white rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3">
                 <div className="w-full flex text-center flex-col items-center">
-                  <TitleComponent>Оставьте заявку</TitleComponent>
+                  <TitleComponent>Оставьте заявку!...</TitleComponent>
                   <p className="text-gray-500">
                     Наши менеджеры свяжутся с вами в ближайшее время
                   </p>
