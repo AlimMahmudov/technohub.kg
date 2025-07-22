@@ -1,8 +1,8 @@
 "use client";
-import { useCard } from "@/components/ui/card/Card";
 import { Name } from "@/components/ui/text/Name";
 import { Title } from "@/components/ui/text/Title";
 import { TitleComponent } from "@/components/ui/text/TitleComponent";
+import { useGetLaptopQuery } from "@/redux/api/laptop";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -11,14 +11,15 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
 const Hero = () => {
-  const { card } = useCard();
+  const { data } = useGetLaptopQuery();
+  console.log(data, "data data");
 
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const [selectedCard, setSelectedCard] = useState<null | (typeof card)[0]>(
-    null
-  );
+  const [selectedCard, setSelectedCard] = useState<
+    null | NonNullable<typeof data>[0]
+  >(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -92,7 +93,7 @@ const Hero = () => {
       {/* Карточки товаров */}
       <div className="w-full py-5 md:px-5 px-0">
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-[10px] w-full">
-          {card.map((el) => (
+          {data?.map((el) => (
             <div
               key={el.id}
               className="bg-white flex flex-col gap-1 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
@@ -101,7 +102,9 @@ const Hero = () => {
                 <div className="relative flex justify-start w-full h-[240px] rounded-[10px] overflow-hidden">
                   <Image
                     className="object-cover w-full h-full"
-                    src={el.image}
+                    src={el.laptop_image[0]?.image}
+                    width={300}
+                    height={200}
                     alt="product"
                   />
                   <div className="absolute bg-white rounded-[7px] px-1 ml-1 mt-1">
@@ -109,7 +112,7 @@ const Hero = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <Name className="text-gray-800">{el.text}</Name>
+                  <Name className="text-gray-800">{el.name}</Name>
                   <TitleComponent>{el.price} сом</TitleComponent>
                 </div>
               </Link>
@@ -155,11 +158,13 @@ const Hero = () => {
                 <div className="relative w-full h-[240px] rounded-[10px] overflow-hidden">
                   <Image
                     className="object-cover w-full h-full"
-                    src={selectedCard.image}
+                    src={selectedCard.laptop_image[0]?.image || "/fallback.jpg"}
+                    width={300}
+                    height={200}
                     alt="product"
                   />
                 </div>
-                <Name className="text-gray-800">{selectedCard.text}</Name>
+                <Name className="text-gray-800">{selectedCard.name}</Name>
                 <TitleComponent>{selectedCard.price} сом</TitleComponent>
               </div>
 
