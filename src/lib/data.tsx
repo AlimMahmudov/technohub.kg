@@ -4,7 +4,6 @@ import { PAGE } from "@/config/pages/public-page.config";
 import { FaHdd, FaTags, FaWindows } from "react-icons/fa";
 import { GiProcessor, GiVideoCamera } from "react-icons/gi";
 import { MdMemory, MdMonitor } from "react-icons/md";
-import { SiIntel, SiNvidia } from "react-icons/si";
 
 export const navbar = [
   {
@@ -82,21 +81,5 @@ export const filters = [
     icon: <FaWindows />,
     title: "Предустановленная ОС",
     options: ["Ubuntu", "MS Windows 11", "MS Windows 10", "MacOS", "DOS"],
-  },
-  {
-    icon: <SiNvidia />,
-    title: "Объем выделенной видеопамяти",
-    options: [
-      "Выделяется из оперативной памяти",
-      "2048 МБ",
-      "4096 МБ",
-      "6144 МБ",
-      "8192 МБ",
-    ],
-  },
-  {
-    icon: <SiIntel />,
-    title: "Производитель процессора",
-    options: ["Intel", "AMD", "Apple"],
   },
 ];

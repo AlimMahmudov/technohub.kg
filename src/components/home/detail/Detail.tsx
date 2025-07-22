@@ -1,16 +1,19 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoClose } from "react-icons/io5";
 import { Title } from "@/components/ui/text/Title";
 import { Description } from "@/components/ui/text/Description";
 import { useCard } from "@/components/ui/card/Card";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import Link from "next/link";
+import { Name } from "@/components/ui/text/Name";
+import { TitleComponent } from "@/components/ui/text/TitleComponent";
 
 const Detail = () => {
   const { detail } = useCard();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -34,9 +37,7 @@ const Detail = () => {
         >
           <Title>Подробнее о ноутбуке</Title>
           <div className="w-full mt-3 flex md:flex-row flex-col gap-4">
-            {/* Sticky блок с изображениями */}
             <div className="md:w-1/2 w-full h-fit md:sticky top-[100px] flex flex-col gap-1 bg-white rounded-[10px] border border-gray-200 p-3 shadow-md">
-              {/* Главная большая картинка */}
               <div className="w-full h-[280px] md:h-full rounded-[10px] overflow-hidden">
                 <a
                   href={typeof el.image === "string" ? el.image : el.image.src}
@@ -98,8 +99,7 @@ const Detail = () => {
                   <h2>
                     <span className="text-gray-500">Ссылка на видео: </span>
                     <Link
-                      target="_blank"
-                      className=" text-blue-500"
+                      className=" text-blue-600"
                       href="https://www.instagram.com/p/DDAS6prsbe-/?img_index=1"
                     >
                       https://www.instagram.com/
@@ -117,7 +117,9 @@ const Detail = () => {
                       <IoCartOutline /> В корзину
                     </button>
                     <button
-                      onClick={openModal}
+                      onClick={() => {
+                        openModal();
+                      }}
                       className="py-2 px-1 rounded-[10px] w-full border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white"
                     >
                       Купить сейчас
@@ -224,51 +226,60 @@ const Detail = () => {
               onClick={closeModal}
             >
               <div
-                className="bg-white flex flex-col gap-1 rounded-lg p-6 max-w-md w-full relative"
+                className="bg-white flex flex-col items-end rounded-lg p-4 w-full max-w-[800px] relative"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button
-                  onClick={closeModal}
-                  className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl font-bold"
-                >
-                  &times;
-                </button>
-                <h2 className="text-xl font-semibold">Покупка ноутбука</h2>
-                <p className="">
-                  Вы выбрали: <strong>{el.text}</strong>
-                </p>
-                <p className="">
-                  Цена: <strong>{el.price} сом</strong>
-                </p>
-                <div className="flex flex-col gap-2">
-                  <input
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
-                    placeholder="Имя"
-                  />
-                  <input
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
-                    placeholder="Телефон"
-                  />
-                  <input
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
-                    placeholder="Эмайл"
-                  />
-                  <textarea
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    placeholder="Сообщения"
-                  ></textarea>
+                <div className="flex w-full items-center justify-between">
+                  <h2 className="text-xl font-semibold">Покупка ноутбука</h2>
+                  <button onClick={closeModal} className="text-[20px]">
+                    <IoClose />
+                  </button>
                 </div>
+
+                <div className="flex flex-col md:flex-row mt-2 gap-4 w-full">
+                  <div className="md:w-1/2 flex flex-col gap-3">
+                    <div className="relative w-full h-[240px] rounded-[10px] overflow-hidden">
+                      <Image
+                        className="object-cover w-full h-full"
+                        src={el.image}
+                        alt="product"
+                      />
+                    </div>
+                    <Name className="text-gray-800">{el.text}</Name>
+                    <TitleComponent>{el.price} сом</TitleComponent>
+                  </div>
+
+                  <div className="md:w-1/2 flex flex-col gap-2">
+                    <input
+                      className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                      type="text"
+                      placeholder="Имя"
+                    />
+                    <input
+                      className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                      type="text"
+                      placeholder="Телефон"
+                    />
+                    <input
+                      className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                      type="text"
+                      placeholder="Email"
+                    />
+                    <textarea
+                      className="bg-white rounded-[10px] w-full h-[50%] py-2 px-3 outline-none border border-gray-400"
+                      placeholder="Сообщение"
+                    ></textarea>
+                  </div>
+                </div>
+
                 <button
                   onClick={() => {
                     alert("Спасибо за покупку!");
                     closeModal();
                   }}
-                  className="w-full bg-[#141414] text-white py-2 mt-1 rounded-[10px]"
+                  className="md:w-[30%] w-[100%] bg-[#141414] text-white py-2 mt-2 rounded-[10px]"
                 >
-                  Подтвердить покупку
+                  Отправить
                 </button>
               </div>
             </div>

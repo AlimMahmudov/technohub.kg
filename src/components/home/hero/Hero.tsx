@@ -7,13 +7,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
-// import { FaHeart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 
 const Hero = () => {
   const { card } = useCard();
 
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const [selectedCard, setSelectedCard] = useState<null | (typeof card)[0]>(
+    null
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,8 +32,9 @@ const Hero = () => {
 
   return (
     <div className="container">
+      {/* Верхняя часть с заголовком и сортировкой */}
       <div className="w-full md:px-5 px-0 mt-[20px] relative">
-        <div className="w-full gap-1   rounded-[10px]   p-0 md:p-3 flex items-center justify-between flex-wrap">
+        <div className="w-full gap-1 rounded-[10px] p-0 md:p-3 flex items-center justify-between flex-wrap">
           <Title>Ноутбуки в Бишкеке, Кыргызстане</Title>
 
           <div className="relative">
@@ -52,9 +58,7 @@ const Hero = () => {
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-semibold">Сортировка</span>
                   <button
-                    onClick={() => {
-                      console.log("Очистить сортировку");
-                    }}
+                    onClick={() => console.log("Очистить сортировку")}
                     className="text-blue-500 text-xs"
                   >
                     Очистить
@@ -76,11 +80,7 @@ const Hero = () => {
                 <div className="flex flex-col items-start mt-2">
                   <div className="flex gap-1">
                     <input type="checkbox" />
-                    <h1>Сначало новинки</h1>
-                  </div>
-                  <div className="flex gap-1">
-                    <input type="checkbox" />
-                    <h1>Сначало популярные</h1>
+                    <h1>Сначала новинки</h1>
                   </div>
                 </div>
               </div>
@@ -88,54 +88,116 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Карточки товаров */}
       <div className="w-full py-5 md:px-5 px-0">
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-[10px] w-full">
           {card.map((el) => (
             <div
               key={el.id}
-              className="bg-white flex  flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
+              className="bg-white flex flex-col gap-1 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
             >
-              <Link
-                href={`/detail/${el.id}`}
-                className="relative flex justify-start w-full h-[240px] rounded-[10px] overflow-hidden"
-              >
-                <Image
-                  className="object-cover w-full h-full"
-                  src={el.image}
-                  alt="product"
-                />
+              <Link href={`/detail/${el.id}`} className="flex flex-col gap-2">
+                <div className="relative flex justify-start w-full h-[240px] rounded-[10px] overflow-hidden">
+                  <Image
+                    className="object-cover w-full h-full"
+                    src={el.image}
+                    alt="product"
+                  />
+                  <div className="absolute bg-white rounded-[7px] px-1 ml-1 mt-1">
+                    <h1>Нет в наличии</h1>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Name className="text-gray-800">{el.text}</Name>
+                  <TitleComponent>{el.price} сом</TitleComponent>
+                </div>
               </Link>
-              <div className="flex flex-col gap-1">
-                <Name className="text-gray-800">{el.text}</Name>
-                <TitleComponent>{el.price} сом</TitleComponent>
-                <div className="flex gap-1">
-                  <div className="bg-slate-200 px-[10px] py-[2px] rounded-[10px] text-[14px]">
-                    <h1>{el.brend}</h1>
-                  </div>
-                  <div className="bg-slate-200 px-[10px] py-[2px] rounded-[10px] text-[14px]">
-                    <h1>{el.processor}</h1>
-                  </div>
-                  <div className="bg-slate-200 px-[10px] py-[2px] rounded-[10px] text-[14px]">
-                    <h1>{el.model}</h1>
-                  </div>
-                </div>
-              </div>
 
-              <div className="">
-                <div className="w-full h-[1px] bg-gray-300"></div>
-                <div className="flex gap-1 mt-1">
-                  <button className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
-                    В корзину
-                  </button>
-                  {/* <button className="w-[15%] flex items-center justify-center py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]">
-                    <FaHeart />
-                  </button> */}
-                </div>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => setSelectedCard(el)}
+                  className="w-full py-2 p-1 mt-2 text-[14px] bg-black text-white rounded-[10px]"
+                >
+                  Уведомить меня
+                </button>
+                <button className="w-[20%] flex items-center justify-center py-2 p-1 mt-2 text-[20px] bg-black text-white rounded-[10px]">
+                  <FaShoppingCart />
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* МОДАЛКА */}
+      {selectedCard && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2"
+          onClick={() => setSelectedCard(null)}
+        >
+          <div
+            className="bg-white flex flex-col items-end rounded-lg p-4 w-full max-w-[800px] relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex w-full items-center justify-between">
+              <h2 className="text-xl font-semibold">Покупка ноутбука</h2>
+              <button
+                onClick={() => setSelectedCard(null)}
+                className="text-[20px]"
+              >
+                <IoClose />
+              </button>
+            </div>
+
+            <div className="flex flex-col md:flex-row mt-2 gap-4 w-full">
+              <div className="md:w-1/2 flex flex-col gap-3">
+                <div className="relative w-full h-[240px] rounded-[10px] overflow-hidden">
+                  <Image
+                    className="object-cover w-full h-full"
+                    src={selectedCard.image}
+                    alt="product"
+                  />
+                </div>
+                <Name className="text-gray-800">{selectedCard.text}</Name>
+                <TitleComponent>{selectedCard.price} сом</TitleComponent>
+              </div>
+
+              <div className="md:w-1/2 flex flex-col gap-2">
+                <input
+                  className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                  type="text"
+                  placeholder="Имя"
+                />
+                <input
+                  className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                  type="text"
+                  placeholder="Телефон"
+                />
+                <input
+                  className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+                  type="text"
+                  placeholder="Email"
+                />
+                <textarea
+                  className="bg-white rounded-[10px] w-full h-[50%] py-2 px-3 outline-none border border-gray-400"
+                  placeholder="Сообщение"
+                ></textarea>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                alert("Спасибо за покупку!");
+                setSelectedCard(null);
+              }}
+              className="md:w-[30%] w-full bg-[#141414] text-white py-2 mt-2 rounded-[10px]"
+            >
+              Отправить
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
