@@ -1,8 +1,11 @@
 namespace CARDS {
   type GetLaptopRes = {
-    id: number; // ← добавь это
+    id: number;
     name: string;
     discount: number;
+    operating_system: string;
+    storage_size_gb: string;
+    in_stock: boolean;
     screen_size: number;
     ram_size_gb: number;
     cpu_model: string;

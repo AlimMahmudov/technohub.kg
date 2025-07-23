@@ -3,7 +3,6 @@ import { FC, ReactNode } from "react";
 import Header from "./header/Header";
 import Menu from "./menu/Menu";
 import { usePathname } from "next/navigation";
-// import clsx from "clsx"; // если используешь clsx, иначе можно просто тернарку в className
 
 interface LayoutPageProps {
   children: ReactNode;

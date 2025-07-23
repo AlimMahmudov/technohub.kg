@@ -133,87 +133,127 @@ const Detail = () => {
                 <h1 className="text-[16px] font-[600]">
                   Основные характеристики
                 </h1>
+
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Экран:</span> 16&quot; IPS
-                  1920x1200 (WUXGA)
-                </p>
-                <p>
-                  <span className="text-gray-500">ОС:</span> нет
-                </p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">Память</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Оперативная память:</span>
-                  64GB DDR5
-                </p>
-                <p>
-                  <span className="text-gray-500">Накопительная память:</span>
-                  256GB SSD NVMe
-                </p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">Процессор</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Модель:</span> Intel Core
-                  i3-1305U
+                  <span className="text-gray-500">Бренд:</span> {data.brand}
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Ядер/потоков:</span> 5/6
+                  <span className="text-gray-500">Размер экрана (дюймы):</span>{" "}
+                  {data.screen_size}
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Частота:</span> 4500 МГц
+                  <span className="text-gray-500">Тип экрана:</span>{" "}
+                  {data.screen_type}
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Кэш:</span> 10 Мб
-                </p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">Видеокарта</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Модель:</span> Intel Graphics
-                </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Видео память:</span> SMA
-                </p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">Интерфейсы и порты</h1>
-                <p className="text-[16px]">3 x USB Type-A</p>
-                <p className="text-[16px]">1 x USB Type-C</p>
-                <p className="text-[16px]">1 x HDMI</p>
-                <p className="text-[16px]">1 x Audio 3.5 мм</p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">
-                  Дополнительные спецификации
-                </h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Подсветка клавиатуры:</span>{" "}
-                  нет
+                  <span className="text-gray-500">Разрешение экрана:</span>{" "}
+                  {data.resolution}
                 </p>
                 <p className="text-[16px]">
                   <span className="text-gray-500">
-                    Сканер отпечатка пальца:
+                    Частота обновления (Гц):
                   </span>{" "}
-                  нет
+                  {data.refresh_rate} Гц
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Батарея:</span> 58 ВтЧ
-                </p>
-              </div>
-              <div>
-                <h1 className="text-[16px] font-[600]">Физические параметры</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Ширина:</span> {data.width_mm}
-                  мм
+                  <span className="text-gray-500">Операционная система:</span>{" "}
+                  {data.operating_system}
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Толщина:</span>{" "}
+                  <span className="text-gray-500">
+                    Оперативная память (ГБ):
+                  </span>{" "}
+                  {data.ram_size_gb} ГБ
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Объем SSD (ГБ):</span>{" "}
+                  {data.storage_size_gb} ГБ
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Тип накопителя:</span>{" "}
+                  {data.storage_type}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Модель процессора:</span>{" "}
+                  {data.cpu_model}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Количество ядер:</span>{" "}
+                  {data.cpu_cores}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Количество потоков:</span>{" "}
+                  {data.cpu_threads}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">
+                    Макс. частота процессора (МГц):
+                  </span>{" "}
+                  {data.cpu_frequency_mhz} МГц
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Кэш процессора (МБ):</span>{" "}
+                  {data.cpu_cache_mb} МБ
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Модель видеокарты:</span>{" "}
+                  {data.gpu_model}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Объем видеопамяти (ГБ):</span>{" "}
+                  {data.gpu_memory} ГБ
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Wi-Fi:</span> {data.wifi}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Ethernet:</span>{" "}
+                  {data.ethernet ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Bluetooth:</span>{" "}
+                  {data.bluetooth ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">USB Type-A (шт):</span>{" "}
+                  {data.usb_type_a_count}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">HDMI:</span>{" "}
+                  {data.hdmi_count ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Ethernet-порт:</span>{" "}
+                  {data.ethernet_port ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Аудиоразъём:</span>{" "}
+                  {data.audio_jack ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Подсветка клавиатуры:</span>{" "}
+                  {data.keyboard_backlight ? "Да" : "Нет"}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Тип аккумулятора:</span>{" "}
+                  {data.battery_type}
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">
+                    Емкость аккумулятора (Вт·ч):
+                  </span>{" "}
+                  {data.battery_capacity_wh} Вт·ч
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Ширина (мм):</span>{" "}
+                  {data.width_mm} мм
+                </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Толщина (мм):</span>{" "}
                   {data.thickness_mm} мм
                 </p>
                 <p className="text-[16px]">
-                  <span className="text-gray-500">Вес:</span> от
+                  <span className="text-gray-500">Вес (кг):</span>{" "}
                   {data.weight_kg} кг
                 </p>
               </div>
