@@ -155,10 +155,10 @@ const Detail = () => {
                   </span>{" "}
                   {data.refresh_rate} Гц
                 </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Операционная система:</span>{" "}
-                  {data.operating_system}
-                </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Память</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">
                     Оперативная память (ГБ):
@@ -173,6 +173,10 @@ const Detail = () => {
                   <span className="text-gray-500">Тип накопителя:</span>{" "}
                   {data.storage_type}
                 </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Процессор</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Модель процессора:</span>{" "}
                   {data.cpu_model}
@@ -195,6 +199,10 @@ const Detail = () => {
                   <span className="text-gray-500">Кэш процессора (МБ):</span>{" "}
                   {data.cpu_cache_mb} МБ
                 </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Видеокарта</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Модель видеокарты:</span>{" "}
                   {data.gpu_model}
@@ -203,6 +211,10 @@ const Detail = () => {
                   <span className="text-gray-500">Объем видеопамяти (ГБ):</span>{" "}
                   {data.gpu_memory} ГБ
                 </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Сети</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Wi-Fi:</span> {data.wifi}
                 </p>
@@ -214,6 +226,10 @@ const Detail = () => {
                   <span className="text-gray-500">Bluetooth:</span>{" "}
                   {data.bluetooth ? "Да" : "Нет"}
                 </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Порты</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">USB Type-A (шт):</span>{" "}
                   {data.usb_type_a_count}
@@ -230,6 +246,10 @@ const Detail = () => {
                   <span className="text-gray-500">Аудиоразъём:</span>{" "}
                   {data.audio_jack ? "Да" : "Нет"}
                 </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Дополнительно</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Подсветка клавиатуры:</span>{" "}
                   {data.keyboard_backlight ? "Да" : "Нет"}
@@ -244,6 +264,14 @@ const Detail = () => {
                   </span>{" "}
                   {data.battery_capacity_wh} Вт·ч
                 </p>
+                <p className="text-[16px]">
+                  <span className="text-gray-500">Операционная система:</span>{" "}
+                  {data.operating_system}
+                </p>
+              </div>
+
+              <div>
+                <h1 className="text-[16px] font-[600]">Габариты</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Ширина (мм):</span>{" "}
                   {data.width_mm} мм
