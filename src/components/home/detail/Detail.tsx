@@ -12,12 +12,36 @@ import { TitleComponent } from "@/components/ui/text/TitleComponent";
 import { useDetailLaptopQuery } from "@/redux/api/laptop";
 import { useParams } from "next/navigation";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+
+interface IContact {
+  link: string;
+  phone_number: string;
+  full_name: string;
+  email: string;
+  description: string;
+}
+
 const Detail = () => {
   const params = useParams();
   const id = Number(params?.id);
   const { data } = useDetailLaptopQuery(id);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { register, handleSubmit, reset } = useForm<IContact>();
+
+  const onSubmit: SubmitHandler<IContact> = async (data) => {
+    try {
+      await axios.post("http://16.170.143.10/store/service-callback/", data);
+      reset();
+      alert("Форма успешно отправлена!");
+    } catch (error) {
+      console.error("Ошибка при отправке формы:", error);
+      alert("Произошла ошибка при отправке формы.");
+    }
+  };
 
   useEffect(() => {
     Fancybox.bind('[data-fancybox="gallery"]', {});
@@ -322,27 +346,34 @@ const Detail = () => {
                   <TitleComponent>{data.price} сом</TitleComponent>
                 </div>
 
-                <div className="md:w-1/2 flex flex-col gap-2">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="md:w-1/2 flex flex-col gap-2"
+                >
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
                     type="text"
                     placeholder="Имя"
+                    {...register("full_name", { required: true })}
                   />
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
                     type="text"
                     placeholder="Телефон"
+                    {...register("phone_number", { required: true })}
                   />
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
                     type="text"
                     placeholder="Email"
+                    {...register("email", { required: true })}
                   />
                   <textarea
                     className="bg-white rounded-[10px] w-full h-[50%] py-2 px-3 outline-none border border-gray-400"
                     placeholder="Сообщение"
+                    {...register("description", { required: true })}
                   ></textarea>
-                </div>
+                </form>
               </div>
 
               <button
