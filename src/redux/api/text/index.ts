@@ -3,7 +3,7 @@ const api = index.injectEndpoints({
 	endpoints: (build) => ({
 		getAbout: build.query<TEXT.GetAboutResponse, TEXT.GetAboutRequest>({
 			query: () => ({
-				url: `aboutus/`,
+				url: `/store/aboutus/`,
 				method: "GET",
 			}),
 			providesTags: ["about"],
@@ -11,7 +11,7 @@ const api = index.injectEndpoints({
 
     getDelivery: build.query<TEXT.GetDeliveryResponse, TEXT.GetDeliveryRequest>({
 			query: () => ({
-				url: `delivery/`,
+				url: `/store/delivery/`,
 				method: "GET",
 			}),
 			providesTags: ["delivery"],
@@ -19,7 +19,7 @@ const api = index.injectEndpoints({
 
     getGarantee: build.query<TEXT.GetGaranteeResponse, TEXT.GetGaranteeRequest>({
 			query: () => ({
-				url: `warranty/`,
+				url: `/store/warranty/`,
 				method: "GET",
 			}),
 			providesTags: ["garantee"],
