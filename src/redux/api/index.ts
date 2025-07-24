@@ -4,19 +4,28 @@ import {
 	fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
-	const baseQuery = fetchBaseQuery({
-		baseUrl: `${process.env.NEXT_PUBLIC_API}/store/`,
-	});
+const baseQuery = fetchBaseQuery({
+  baseUrl: process.env.NEXT_PUBLIC_API,
+  prepareHeaders: (headers) => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('access') : null;
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
 
-	return baseQuery(args, api, extraOptions);
+
+const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
+	const results = await baseQuery(args, api, extraOptions);
+	return results;
 };
 
 export const api = createApi({
-	reducerPath: "api",
 	baseQuery: baseQueryExtended,
+	reducerPath: "api",
 	refetchOnFocus: true,
-	refetchOnReconnect: true,
-	tagTypes: ["laptop", "contact", "about", "delivery","garantee"],
+	refetchOnReconnect: false,
+	tagTypes: ["laptop", "contact", "about", "delivery","garantee","auth"],
 	endpoints: () => ({}),
 });

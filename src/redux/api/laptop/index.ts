@@ -4,7 +4,7 @@ const api = index.injectEndpoints({
   endpoints: (build) => ({
     getLaptop: build.query<CARDS.GetLaptopRes[], CARDS.GetLaptopReq>({
       query: () => ({
-        url: `/laptop/`,
+        url: `/store/laptop/`,
         method: "GET",
       }),
       providesTags: ["laptop"],
@@ -14,7 +14,7 @@ const api = index.injectEndpoints({
       CARDS.GetLaptopDetailReq
     >({
       query: (id) => ({
-        url: `/laptop/${id}`,
+        url: `/store/laptop/${id}`,
         method: "GET",
       }),
       providesTags: ["laptop"],

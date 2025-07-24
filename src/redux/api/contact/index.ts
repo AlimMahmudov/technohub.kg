@@ -4,7 +4,7 @@ const api = index.injectEndpoints({
   endpoints: (build) => ({
     getContact: build.query<CARDS.GetContactRes[], CARDS.GetContactReq>({
       query: () => ({
-        url: `/contact/`,
+        url: `/store/contact/`,
         method: "GET",
       }),
       providesTags: ["contact"],
