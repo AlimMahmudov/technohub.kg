@@ -69,4 +69,29 @@ namespace CARDS {
   };
 
   type GetLaptopDetailReq = number;
+
+ 
+  /// basket
+
+  type PostBasketReq = {
+    product_id: number;
+    quantity: number;
+  };
+  type PostBasketRes = {
+    id: number;
+    laptop: number;
+    quantity: number;
+  };
+
+  type GetBasketRes = {
+    id: number;
+    product: GetLaptopRes; 
+    quantity: number;
+  };
+
+  type UpdateQuantityRes = {
+    id: number;
+    quantity: number;
+    product_id: number;
+  }
 }

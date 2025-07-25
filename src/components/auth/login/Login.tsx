@@ -73,7 +73,7 @@ const Login = () => {
 				</div>
 			</div>
 
-			<div className="w-full flex justify-center md:px-5 px-0 mt-4">
+			<div className="w-full flex justify-center md:px-5 px-0 mt-[70px]">
 				<form
 					onSubmit={handleSubmit(onSubmit)}
 					className=" max-w-[500px] w-full flex flex-col items-center md:px-5 py-2 p-2 gap-5 rounded-[10px] border border-gray-300 shadow-md">
@@ -91,13 +91,13 @@ const Login = () => {
 						<input
 							className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
 							type="text"
-							placeholder="Enter your email"
+							placeholder="Введите свой email адрес"
 							{...register("username", { required: true })}
 						/>
 						<input
 							type="password"
 							className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
-							placeholder="Enter your password"
+							placeholder="Введите пароль"
 							{...register("password", { required: true })}
 						/>
 						<button

@@ -9,6 +9,7 @@ import { navbar } from "@/lib/data";
 import { IoCartOutline } from "react-icons/io5";
 import { RiUserLine } from "react-icons/ri";
 import { useGetUserQuery, useLoautUserMutation } from "@/redux/api/auth";
+import { useGetBasketQuery } from "@/redux/api/laptop";
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,10 @@ const Header = () => {
 
 	const { data } = useGetUserQuery();
 	const [logoutUser, { isLoading }] = useLoautUserMutation();
+
+	const { data: basketData } = useGetBasketQuery();
+	const totalCount =
+		basketData?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
 	const user = data?.[0];
 
@@ -39,7 +44,7 @@ const Header = () => {
 		}
 	};
 	return (
-		<header className="w-full  bg-transparent ">
+		<header className="w-full md:relative sticky top-0 left-0 z-40  bg-transparent ">
 			<div className="flex items-center z-50 w-full h-[60px] bg-[#141414]">
 				<div className="container">
 					<div className="flex justify-between py-2 items-center">
@@ -70,11 +75,18 @@ const Header = () => {
 							</div>
 
 							<div className="flex gap-2 w-full justify-end  ">
-								<button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
-									<Link href={PAGE.BASKET}>
-										<IoCartOutline />
-									</Link>
-								</button>
+								<div className=" relative">
+									<button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
+										<Link href={PAGE.BASKET}>
+											<IoCartOutline />
+										</Link>
+									</button>
+									{totalCount > 0 && (
+										<span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-[5px]">
+											{totalCount}
+										</span>
+									)}
+								</div>
 								{!user ? (
 									<button className="text-white md:flex hidden text-[14px] bg-[#64646469] p-1 px-2 justify-center items-center gap-2 rounded-[6px]">
 										<Link className="flex items-center gap-1" href={PAGE.LOGIN}>

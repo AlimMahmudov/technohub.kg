@@ -80,7 +80,7 @@ const Confirm = () => {
 			</div>
 			<form
 				onSubmit={handleSubmit}
-				className="max-w-[500px] mx-auto flex flex-col gap-4 border mt-4 p-4 rounded-lg shadow-md">
+				className="max-w-[500px] mx-auto flex flex-col gap-4 border border-gray-300 mt-[70px] p-4 rounded-lg shadow-md">
 				<h2 className="text-xl font-bold">Сброс пароля</h2>
 
 				<input
