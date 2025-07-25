@@ -68,7 +68,7 @@ const Register = () => {
 					</Title>
 				</div>
 			</div>
-			<div className="w-full flex justify-center md:px-5 px-0 mt-4">
+			<div className="w-full flex justify-center md:px-5 px-0 mt-[70px]">
 				<div className="md:w-[40%] w-full flex flex-col items-center md:px-5 py-2 gap-5 p-2 rounded-[10px] border border-gray-300 shadow-md">
 					<div className="w-full flex flex-col gap-2 items-center text-center">
 						<TitleComponent className="text-[20px]">
@@ -86,19 +86,19 @@ const Register = () => {
 						<input
 							type="text"
 							className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
-							placeholder="Enter your username"
+							placeholder="Введите свое имя"
 							{...register("username", { required: true })}
 						/>
 						<input
 							type="email"
 							className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
-							placeholder="Enter your email address"
+							placeholder="Введите свой email адрес"
 							{...register("email", { required: true })}
 						/>
 						<input
 							type="password"
 							className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
-							placeholder="Enter your password"
+							placeholder="Введите пароль"
 							{...register("password", { required: true })}
 						/>
 						<button

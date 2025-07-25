@@ -52,7 +52,7 @@ const ResetPassword = () => {
 			<ToastContainer />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="max-w-[500px] mx-auto flex flex-col gap-4 border mt-4 p-4 rounded-lg shadow-md">
+				className="max-w-[500px] mx-auto flex flex-col gap-4   mt-[70px] border border-gray-300 p-4 rounded-lg shadow-md">
 				<TitleComponent>Восстановление пароля</TitleComponent>
 				<Description>
 					Введите вашу почту, и мы отправим ссылку для сброса пароля.
