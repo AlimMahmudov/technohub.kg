@@ -384,7 +384,7 @@ const Detail = () => {
                     type="submit"
                     className="w-full bg-[#141414] text-white py-2 mt-2 rounded-[10px]"
                   >
-                    Отправить
+                    Отправить!
                   </button>
                 </form>
               </div>
