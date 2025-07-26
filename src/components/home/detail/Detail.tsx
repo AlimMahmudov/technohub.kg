@@ -32,11 +32,17 @@ const Detail = () => {
 
   const { register, handleSubmit, reset } = useForm<IContact>();
 
-  const onSubmit: SubmitHandler<IContact> = async (data) => {
+  const onSubmit: SubmitHandler<IContact> = async (formData) => {
+    const dataWithLink = {
+      ...formData,
+      link: "https://github.com/AlimMahmudov/technohub.kg",
+    };
+
     try {
-      await axios.post("http://16.170.143.10/store/service-callback/", data);
-      reset();
+      await axios.post("http://16.170.143.10/store/order/", dataWithLink);
+      reset(); // сброс формы
       alert("Форма успешно отправлена!");
+      closeModal(); // закрыть модалку
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
       alert("Произошла ошибка при отправке формы.");
@@ -348,7 +354,7 @@ const Detail = () => {
 
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="md:w-1/2 flex flex-col gap-2"
+                  className="md:w-1/2 flex flex-col items-end gap-2"
                 >
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
@@ -356,6 +362,7 @@ const Detail = () => {
                     placeholder="Имя"
                     {...register("full_name", { required: true })}
                   />
+
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
                     type="text"
@@ -373,18 +380,14 @@ const Detail = () => {
                     placeholder="Сообщение"
                     {...register("description", { required: true })}
                   ></textarea>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#141414] text-white py-2 mt-2 rounded-[10px]"
+                  >
+                    Отправить!
+                  </button>
                 </form>
               </div>
-
-              <button
-                onClick={() => {
-                  alert("Спасибо за покупку!");
-                  closeModal();
-                }}
-                className="md:w-[30%] w-[100%] bg-[#141414] text-white py-2 mt-2 rounded-[10px]"
-              >
-                Отправить
-              </button>
             </div>
           </div>
         )}
