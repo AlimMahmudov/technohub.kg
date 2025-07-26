@@ -23,6 +23,10 @@ export const navbar = [
     name: "Гарантия",
   },
   {
+    href: PAGE.SERVICE,
+    name: "Сервис",
+  },
+  {
     href: PAGE.CONTACT,
     name: "Контакты",
   },

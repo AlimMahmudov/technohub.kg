@@ -23,7 +23,7 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
-      await axios.post("http://16.170.143.10/store/service-callback/", data);
+      await axios.post("http://16.170.143.10/store/callback/", data);
       reset();
       alert("Форма успешно отправлена!");
     } catch (error) {
