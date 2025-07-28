@@ -5,6 +5,7 @@ const api = index.injectEndpoints({
       query: () => ({
         url: `/store/aboutus/`,
         method: "GET",
+        skipAuth: true, 
       }),
       providesTags: ["about"],
     }),
@@ -14,6 +15,7 @@ const api = index.injectEndpoints({
         query: () => ({
           url: `/store/delivery/`,
           method: "GET",
+          skipAuth: true, 
         }),
         providesTags: ["delivery"],
       }
@@ -24,6 +26,7 @@ const api = index.injectEndpoints({
         query: () => ({
           url: `/store/warranty/`,
           method: "GET",
+          skipAuth: true, 
         }),
         providesTags: ["garantee"],
       }
@@ -33,6 +36,7 @@ const api = index.injectEndpoints({
       query: () => ({
         url: `/store/service/`,
         method: "GET",
+        skipAuth: true, 
       }),
       providesTags: ["service"],
     }),
