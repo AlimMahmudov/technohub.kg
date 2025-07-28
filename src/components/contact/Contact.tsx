@@ -13,7 +13,6 @@ import axios from "axios";
 interface IContact {
   phone_number: string;
   full_name: string;
-  email: string;
   description: string;
 }
 
@@ -110,15 +109,13 @@ const Contact = () => {
                   />
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
+                    type="tel"
                     placeholder="Телефон"
-                    {...register("phone_number", { required: true })}
-                  />
-                  <input
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
-                    placeholder="Email"
-                    {...register("email", { required: true })}
+                    {...register("phone_number", {
+                      required: true,
+                      pattern: /^\+996\d{9}$/, // проверка на формат
+                    })}
+                    defaultValue="+996"
                   />
                   <textarea
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"

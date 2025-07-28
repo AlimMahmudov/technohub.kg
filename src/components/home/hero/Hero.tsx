@@ -30,7 +30,6 @@ interface IContact {
   link: string;
   phone_number: string;
   full_name: string;
-  email: string;
   description: string;
 }
 
@@ -260,15 +259,25 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                       height={200}
                       alt="product"
                     />
-                    {!el.in_stock && (
-                      <div className="absolute bg-white rounded-[7px] px-1 ml-1 mt-1">
-                        <h1>Нет в наличии</h1>
-                      </div>
-                    )}
+                    <div className="absolute mt-1 ml-1 flex gap-1">
+                      {!el.in_stock && (
+                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
+                          <h1>Нет в наличии</h1>
+                        </div>
+                      )}
+                      {!el.in_composition && (
+                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
+                          <h1>Есть на складе</h1>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="flex flex-col gap-1">
                     <Name className="text-gray-800">{el.name}</Name>
-                    <TitleComponent>{el.price} сом</TitleComponent>
+                    <div className="flex justify-between">
+                      <TitleComponent>{el.price} сом</TitleComponent>
+                      <Name>Артикул {el.articles}</Name>
+                    </div>
                   </div>
                 </Link>
 
@@ -277,7 +286,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                     onClick={() => setSelectedCard(el)}
                     className="w-full py-2 p-1 mt-2   text-[14px] bg-black text-white rounded-[10px]"
                   >
-                    Уведомить меня
+                    Оставить заявку
                   </button>
                   <button
                     onClick={() => {
@@ -346,7 +355,10 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                   />
                 </div>
                 <Name className="text-gray-800">{selectedCard.name}</Name>
-                <TitleComponent>{selectedCard.price} сом</TitleComponent>
+                <div className="flex">
+                  <TitleComponent>{selectedCard.price} сом</TitleComponent>
+                  <TitleComponent>{selectedCard.articles} сом</TitleComponent>
+                </div>
               </div>
 
               <form
@@ -362,16 +374,15 @@ const Hero = ({ selectedFilters }: HeroProps) => {
 
                 <input
                   className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                  type="text"
+                  type="tel"
                   placeholder="Телефон"
-                  {...register("phone_number", { required: true })}
+                  {...register("phone_number", {
+                    required: true,
+                    pattern: /^\+996\d{9}$/,
+                  })}
+                  defaultValue="+996"
                 />
-                <input
-                  className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                  type="text"
-                  placeholder="Email"
-                  {...register("email", { required: true })}
-                />
+
                 <textarea
                   className="bg-white rounded-[10px] w-full h-[50%] py-2 px-3 outline-none border border-gray-400"
                   placeholder="Сообщение"

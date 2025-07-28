@@ -3,8 +3,8 @@
 import { FilterState } from "@/components/home/HomePage";
 import { useGetLaptopQuery } from "@/redux/api/laptop";
 import { useState, useMemo } from "react";
-import { FaHdd, FaTags, FaWindows } from "react-icons/fa";
-import { GiProcessor, GiVideoCamera } from "react-icons/gi";
+import { FaHdd, FaMemory, FaTags, FaWindows } from "react-icons/fa";
+import { GiProcessor } from "react-icons/gi";
 import { MdMemory, MdMonitor } from "react-icons/md";
 import { RiResetLeftLine } from "react-icons/ri";
 
@@ -18,6 +18,9 @@ export default function Menu({
   setSelectedFilters,
 }: MenuProps) {
   const { data = [] } = useGetLaptopQuery();
+
+  // Фильтруем данные, убираем те, у которых есть discount
+  const filteredData = data.filter((item) => !item.discount);
 
   const handleCheckboxChange = (field: string, value: string | number) => {
     setSelectedFilters((prev) => {
@@ -38,8 +41,10 @@ export default function Menu({
   };
 
   const filters = useMemo(() => {
-    const getUnique = <T,>(key: keyof (typeof data)[0]): T[] =>
-      Array.from(new Set(data.map((item) => item[key] as T))).filter(Boolean);
+    const getUnique = <T,>(key: keyof (typeof filteredData)[0]): T[] =>
+      Array.from(new Set(filteredData.map((item) => item[key] as T))).filter(
+        Boolean
+      );
 
     return [
       {
@@ -61,14 +66,14 @@ export default function Menu({
         options: getUnique<number>("cpu_model"),
       },
       {
-        icon: <MdMemory />,
+        icon: <FaMemory />,
         title: "Объём оперативной памяти",
         field: "ram_size_gb",
         options: getUnique<number>("ram_size_gb"),
       },
       {
-        icon: <GiVideoCamera />,
-        title: "Чипсет видео",
+        icon: <MdMemory />,
+        title: "Видеокарта",
         field: "gpu_model",
         options: getUnique<number>("gpu_model"),
       },
@@ -85,7 +90,7 @@ export default function Menu({
         options: getUnique<number>("operating_system"),
       },
     ];
-  }, [data]);
+  }, [filteredData]);
 
   return (
     <div className="min-w-[200px] bg-[#e7e6e6] min-h-[100vh] text-black md:flex hidden p-2">

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useGetGaranteeQuery } from "@/redux/api/text";
+import { useGetServiceQuery } from "@/redux/api/text";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import TextSkeleton from "../skeleton/TextSkeleton";
@@ -11,14 +11,15 @@ import { TitleComponent } from "../ui/text/TitleComponent";
 interface IContact {
   phone_number: string;
   full_name: string;
-  email: string;
   description: string;
 }
 
 const Service = () => {
   const BASE_URL = process.env.NEXT_PUBLIC_API || "";
 
-  const { data, isLoading } = useGetGaranteeQuery();
+  const { data, isLoading } = useGetServiceQuery();
+  console.log(data, "dara data");
+
   const { register, handleSubmit, reset } = useForm<IContact>();
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
@@ -47,7 +48,7 @@ const Service = () => {
 
   return (
     <div className="container">
-      <div className="w-full h-full min-h-[70vh] py-2 md:px-5 px-0">
+      <div className="w-full h-full min-h-[75vh] py-2 md:px-5 px-0">
         {processedDescription && (
           <div dangerouslySetInnerHTML={{ __html: processedDescription }} />
         )}
@@ -89,15 +90,13 @@ const Service = () => {
               />
               <input
                 className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                type="text"
+                type="tel"
                 placeholder="Телефон"
-                {...register("phone_number", { required: true })}
-              />
-              <input
-                className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                type="text"
-                placeholder="Email"
-                {...register("email", { required: true })}
+                {...register("phone_number", {
+                  required: true,
+                  pattern: /^\+996\d{9}$/,
+                })}
+                defaultValue="+996"
               />
               <textarea
                 className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"

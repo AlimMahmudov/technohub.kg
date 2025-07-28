@@ -19,7 +19,6 @@ interface IContact {
   link: string;
   phone_number: string;
   full_name: string;
-  email: string;
   description: string;
 }
 
@@ -85,31 +84,61 @@ const Detail = () => {
 
             {/* Миниатюры */}
             <div className="flex gap-1 mt-2">
-              {data.laptop_image?.slice(0, 3).map((img) => {
+              {data.laptop_image?.slice(0, 2).map((img, index) => {
                 const photoUrl = img.image ?? "/fallback.jpg";
-
                 return (
-                  <a
-                    key={img.id}
-                    href={photoUrl}
-                    data-fancybox="gallery"
-                    data-caption={data.name}
-                    className="w-full h-[100px] rounded-[10px] overflow-hidden"
-                  >
-                    <Image
-                      className="object-cover w-full h-full"
-                      src={photoUrl}
-                      alt="product"
-                      width={150}
-                      height={100}
-                    />
-                  </a>
+                  <div key={img.id} className="w-full">
+                    <a
+                      href={photoUrl}
+                      data-fancybox="gallery"
+                      data-caption={`${data.name} — Фото ${index + 1}`}
+                      className="block w-full h-[100px] rounded-[10px] overflow-hidden"
+                    >
+                      <Image
+                        className="object-cover w-full h-full"
+                        src={photoUrl}
+                        alt={`Фото ${index + 1}`}
+                        width={150}
+                        height={100}
+                      />
+                    </a>
+                    <p className="text-xs text-center mt-1 text-gray-600">
+                      Фото {index + 1}
+                    </p>
+                  </div>
                 );
               })}
 
-              {data.laptop_image && data.laptop_image.length > 3 && (
-                <div className="w-full h-[100px] rounded-[10px] overflow-hidden bg-black flex justify-center items-center cursor-pointer text-white text-[22px] font-bold">
-                  +{data.laptop_image.length - 3}
+              {data.laptop_image && data.laptop_image.length > 2 && (
+                <div className="relative w-full h-[100px] rounded-[10px] overflow-hidden cursor-pointer">
+                  <a
+                    href={data.laptop_image[2].image ?? "/fallback.jpg"}
+                    data-fancybox="gallery"
+                    data-caption={`${data.name} — Фото 3`}
+                    className="block w-full h-full"
+                  >
+                    <Image
+                      className="object-cover w-full h-full brightness-50"
+                      src={data.laptop_image[2].image ?? "/fallback.jpg"}
+                      alt="Еще фото"
+                      width={150}
+                      height={100}
+                    />
+                    <div className="absolute inset-0 flex justify-center items-center text-white font-bold text-xl">
+                      +{data.laptop_image.length - 2}
+                    </div>
+                  </a>
+
+                  {/* Остальные изображения — невидимые, но доступны в Fancybox */}
+                  {data.laptop_image.slice(3).map((img, idx) => (
+                    <a
+                      key={img.id}
+                      href={img.image ?? "/fallback.jpg"}
+                      data-fancybox="gallery"
+                      data-caption={`${data.name} — Фото ${idx + 4}`}
+                      className="hidden"
+                    />
+                  ))}
                 </div>
               )}
             </div>
@@ -127,16 +156,14 @@ const Detail = () => {
                   <span className="text-gray-500">Гарантия:</span>{" "}
                   {data.warranty} месяцев
                 </h2>
-                <h2>
-                  <span className="text-gray-500">Ссылка на видео: </span>
-                  <Link
-                    className=" text-blue-600"
-                    href="https://www.instagram.com/p/DDAS6prsbe-/?img_index=1"
-                  >
-                    https://www.instagram.com/
-                  </Link>
-                </h2>
-
+                {data.link && (
+                  <h2>
+                    <span className="text-gray-500">Ссылка на видео: </span>
+                    <Link className=" text-blue-600" href={data.link}>
+                      {data.link}
+                    </Link>
+                  </h2>
+                )}
                 <Description className="text-gray-600">
                   {data.description}
                 </Description>
@@ -225,10 +252,6 @@ const Detail = () => {
                   </span>{" "}
                   {data.cpu_frequency_mhz} МГц
                 </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Кэш процессора (МБ):</span>{" "}
-                  {data.cpu_cache_mb} МБ
-                </p>
               </div>
 
               <div>
@@ -245,36 +268,31 @@ const Detail = () => {
 
               <div>
                 <h1 className="text-[16px] font-[600]">Сети</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Wi-Fi:</span> {data.wifi}
-                </p>
+
                 <p className="text-[16px]">
                   <span className="text-gray-500">Ethernet:</span>{" "}
-                  {data.ethernet ? "Да" : "Нет"}
+                  {data.ethernet ? "Есть" : "Нет"}
                 </p>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Bluetooth:</span>{" "}
-                  {data.bluetooth ? "Да" : "Нет"}
+                  {data.bluetooth ? "Есть" : "Нет"}
                 </p>
               </div>
 
               <div>
                 <h1 className="text-[16px] font-[600]">Порты</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">USB Type-A (шт):</span>{" "}
-                  {data.usb_type_a_count}
-                </p>
+
                 <p className="text-[16px]">
                   <span className="text-gray-500">HDMI:</span>{" "}
-                  {data.hdmi_count ? "Да" : "Нет"}
+                  {data.hdmi_count ? "Есть" : "Нет"}
                 </p>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Ethernet-порт:</span>{" "}
-                  {data.ethernet_port ? "Да" : "Нет"}
+                  {data.ethernet_port ? "Есть" : "Нет"}
                 </p>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Аудиоразъём:</span>{" "}
-                  {data.audio_jack ? "Да" : "Нет"}
+                  {data.audio_jack ? "Есть" : "Нет"}
                 </p>
               </div>
 
@@ -282,12 +300,9 @@ const Detail = () => {
                 <h1 className="text-[16px] font-[600]">Дополнительно</h1>
                 <p className="text-[16px]">
                   <span className="text-gray-500">Подсветка клавиатуры:</span>{" "}
-                  {data.keyboard_backlight ? "Да" : "Нет"}
+                  {data.keyboard_backlight ? "Есть" : "Нет"}
                 </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Тип аккумулятора:</span>{" "}
-                  {data.battery_type}
-                </p>
+
                 <p className="text-[16px]">
                   <span className="text-gray-500">
                     Емкость аккумулятора (Вт·ч):
@@ -297,22 +312,6 @@ const Detail = () => {
                 <p className="text-[16px]">
                   <span className="text-gray-500">Операционная система:</span>{" "}
                   {data.operating_system}
-                </p>
-              </div>
-
-              <div>
-                <h1 className="text-[16px] font-[600]">Габариты</h1>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Ширина (мм):</span>{" "}
-                  {data.width_mm} мм
-                </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Толщина (мм):</span>{" "}
-                  {data.thickness_mm} мм
-                </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Вес (кг):</span>{" "}
-                  {data.weight_kg} кг
                 </p>
               </div>
             </div>
@@ -365,16 +364,15 @@ const Detail = () => {
 
                   <input
                     className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
+                    type="tel"
                     placeholder="Телефон"
-                    {...register("phone_number", { required: true })}
+                    {...register("phone_number", {
+                      required: true,
+                      pattern: /^\+996\d{9}$/, // проверка на формат
+                    })}
+                    defaultValue="+996"
                   />
-                  <input
-                    className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                    type="text"
-                    placeholder="Email"
-                    {...register("email", { required: true })}
-                  />
+
                   <textarea
                     className="bg-white rounded-[10px] w-full h-[50%] py-2 px-3 outline-none border border-gray-400"
                     placeholder="Сообщение"

@@ -17,14 +17,10 @@ interface IMessage {
   full_name: string;
   email: string;
   description: string;
-  product: [
-    {
-      id: number;
-      quentity: number;
-      name: string;
-      price: number;
-    }
-  ];
+  products: {
+    id: number;
+    quantity: number;
+  }[];
 }
 
 const Basket = () => {
@@ -32,11 +28,26 @@ const Basket = () => {
   const [deleteItem] = useDeleteBasketMutation();
   const [updateQuantity] = useUpdateQuantityMutation();
 
-  const { register, handleSubmit, reset } = useForm<IMessage>();
+  const { register, handleSubmit, reset } =
+    useForm<Omit<IMessage, "products">>();
 
-  const onSubmit: SubmitHandler<IMessage> = async (data) => {
+  const onSubmit: SubmitHandler<Omit<IMessage, "products">> = async (
+    formData
+  ) => {
+    if (!data) return;
+
+    const products = data.map((item) => ({
+      id: item.product.id,
+      quantity: item.quantity,
+    }));
+
+    const payload: IMessage = {
+      ...formData,
+      products,
+    };
+
     try {
-      await axios.post("http://16.170.143.10/store/order/", data);
+      await axios.post("http://16.170.143.10/store/cart-callback/", payload);
       reset();
       alert("Форма успешно отправлена!");
     } catch (error) {
@@ -47,12 +58,12 @@ const Basket = () => {
 
   if (isLoading) return <TextSkeleton />;
 
-  if (error)
+  if (error || !data?.length)
     return (
-      <div className="w-full justify-center items-center   py-10">
+      <div className="w-full justify-center items-center py-10">
         <div className="container flex flex-col justify-center items-center">
           <Image className="w-[400px] h-full" src={img} alt="img" />
-          <h1 className="text-[40px] text-gray-500">Корзина пуста </h1>
+          <h1 className="text-[40px] text-gray-500">Корзина пуста</h1>
         </div>
       </div>
     );
@@ -89,7 +100,7 @@ const Basket = () => {
     }
   };
 
-  const sortedData = data ? [...data].sort((a, b) => a.id - b.id) : [];
+  const sortedData = [...data].sort((a, b) => a.id - b.id);
 
   return (
     <div className="container">
@@ -106,7 +117,7 @@ const Basket = () => {
               className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
               key={el.id}
             >
-              <div key={el.id} className=" flex md:gap-10 gap-3">
+              <div className="flex md:gap-10 gap-3">
                 <div className="w-[180px] h-[80px] rounded-[10px] overflow-hidden">
                   <Image
                     className="object-cover w-full h-full"
@@ -127,7 +138,7 @@ const Basket = () => {
                   </div>
 
                   <div className="mt-2 md:mt-0 w-full flex items-center">
-                    <div className="flex items-center w-full  justify-between gap-1">
+                    <div className="flex items-center w-full justify-between gap-1">
                       <h2 className="flex w-full max-w-[200px] text-[18px] font-[500] text-black">
                         {(el.product?.price ?? 0) * el.quantity} сом
                       </h2>
@@ -202,34 +213,23 @@ const Basket = () => {
               </div>
             </div>
           ))}
-
-          {data?.length === 0 && (
-            <div className="w-full justify-center items-center">
-              <div className="container flex flex-col justify-center items-center">
-                <Image className="w-[400px] h-full" src={img} alt="img" />
-                <h1 className="text-[40px] text-gray-500">Корзина пуста </h1>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
-      {data && data.length > 0 && (
-        <div className="w-full md:px-5 px-0">
-          <div className="p-3 mt-[14px]">
-            <h1 className="flex items-center gap-1 text-[23px] font-semibold">
-              <span className="text-[16px]">Итого:</span> {total} сом
-            </h1>
-          </div>
+      <div className="w-full md:px-5 px-0">
+        <div className="p-3 mt-[14px]">
+          <h1 className="flex items-center gap-1 text-[23px] font-semibold">
+            <span className="text-[16px]">Итого:</span> {total} сом
+          </h1>
         </div>
-      )}
+      </div>
 
       {/* Форма заказа */}
       <div className="w-full flex justify-center pb-10">
-        <div className="w-full md:w-[60%] h-fit md:sticky top-[100px] flex flex-col gap-1 bg-white rounded-[10px]">
+        <div className="w-full md:w-[60%] h-fit flex flex-col gap-1 bg-white rounded-[10px]">
           <div className="w-full h-full bg-white rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3">
             <div className="w-full flex text-center flex-col items-center">
-              <TitleComponent>Оставьте заявку!...</TitleComponent>
+              <TitleComponent>Оставьте заявку!</TitleComponent>
               <p className="text-gray-500">
                 Наши менеджеры свяжутся с вами в ближайшее время
               </p>
@@ -246,19 +246,17 @@ const Basket = () => {
               />
               <input
                 className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                type="text"
+                type="tel"
                 placeholder="Телефон"
-                {...register("phone_number", { required: true })}
-              />
-              <input
-                className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                type="text"
-                placeholder="Email"
-                {...register("email", { required: true })}
+                {...register("phone_number", {
+                  required: true,
+                  pattern: /^\+996\d{9}$/, // проверка на формат
+                })}
+                defaultValue="+996"
               />
               <textarea
                 className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
-                placeholder="Сообщения"
+                placeholder="Сообщение"
                 {...register("description", { required: true })}
               ></textarea>
               <button

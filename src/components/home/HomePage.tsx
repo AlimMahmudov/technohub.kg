@@ -19,8 +19,8 @@ const HomePage = () => {
         setSelectedFilters={setSelectedFilters}
       />
       <div className="w-full">
-        <Hero selectedFilters={selectedFilters} />
         <Discount />
+        <Hero selectedFilters={selectedFilters} />
       </div>
     </div>
   );

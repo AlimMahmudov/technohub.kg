@@ -11,15 +11,22 @@ namespace CARDS {
     cpu_model: string;
     brand: string;
     gpu_model: string;
-    width_mm: number;
-    thickness_mm: number;
-    weight_kg: number;
+    articles: number;
+    in_composition: boolean;
     price: number;
     laptop_image: {
       id: number;
       image: string;
     }[];
   };
+
+  // cpu_cache_mb;
+  // wifi
+  // usb_type_a_count
+  // battery_type
+  // width_mm
+  // thickness_mm
+  // weight_kg
 
   type GetLaptopReq = void;
 
@@ -29,6 +36,8 @@ namespace CARDS {
     description: string;
     link: string;
     price: number;
+    in_composition: boolean;
+    articles: number;
     in_stock: boolean;
     discount: number;
     warranty: number;
@@ -45,23 +54,16 @@ namespace CARDS {
     cpu_cores: number;
     cpu_threads: number;
     cpu_frequency_mhz: number;
-    cpu_cache_mb: number;
     gpu_model: string;
     gpu_memory: string;
-    wifi: string;
     ethernet: boolean;
     bluetooth: boolean;
-    usb_type_a_count: number;
     hdmi_count: boolean;
     ethernet_port: boolean;
     audio_jack: boolean;
     keyboard_backlight: boolean;
-    battery_type: string;
     battery_capacity_wh: number;
     operation_system: string;
-    width_mm: number;
-    thickness_mm: number;
-    weight_kg: number;
     laptop_image?: {
       id: number;
       image: string | null;
@@ -69,9 +71,6 @@ namespace CARDS {
   };
 
   type GetLaptopDetailReq = number;
-
- 
-  /// basket
 
   type PostBasketReq = {
     product_id: number;
@@ -85,7 +84,7 @@ namespace CARDS {
 
   type GetBasketRes = {
     id: number;
-    product: GetLaptopRes; 
+    product: GetLaptopRes;
     quantity: number;
   };
 
@@ -93,5 +92,5 @@ namespace CARDS {
     id: number;
     quantity: number;
     product_id: number;
-  }
+  };
 }
