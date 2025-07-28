@@ -60,7 +60,7 @@ const Basket = () => {
 
   if (error || !data?.length)
     return (
-      <div className="w-full justify-center items-center py-10">
+      <div className="w-full h-[100vh] justify-center items-center py-10">
         <div className="container flex flex-col justify-center items-center">
           <Image className="w-[400px] h-full" src={img} alt="img" />
           <h1 className="text-[40px] text-gray-500">Корзина пуста</h1>

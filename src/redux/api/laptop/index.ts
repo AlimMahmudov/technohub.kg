@@ -6,6 +6,7 @@ const api = index.injectEndpoints({
 			query: () => ({
 				url: `/store/laptop/`,
 				method: "GET",
+				skipAuth: true, 
 			}),
 			providesTags: ["laptop"],
 		}),
@@ -16,6 +17,7 @@ const api = index.injectEndpoints({
 			query: (id) => ({
 				url: `/store/laptop/${id}`,
 				method: "GET",
+				skipAuth: true, 
 			}),
 			providesTags: ["laptop"],
 		}),
@@ -27,6 +29,7 @@ const api = index.injectEndpoints({
         url: `/store/cart_items/`,
         method: "POST",
         body,
+				
       }),
       invalidatesTags: ["laptop"],
     }),
@@ -43,6 +46,7 @@ const api = index.injectEndpoints({
       query: (id) => ({
         url: `/store/cart_items/${id}/`,
         method: "DELETE",
+				
       }),
       invalidatesTags: ["laptop"],
     }),
