@@ -10,7 +10,8 @@ import {
 const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API,
   prepareHeaders: (headers) => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("access") : null;
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("access") : null;
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -49,7 +50,15 @@ const baseQueryExtended: BaseQueryFn<
 export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryExtended,
-  tagTypes: ["laptop", "contact", "about", "delivery", "garantee", "auth", "service"],
+  tagTypes: [
+    "laptop",
+    "contact",
+    "about",
+    "delivery",
+    "garantee",
+    "auth",
+    "service",
+  ],
   refetchOnFocus: true,
   refetchOnReconnect: false,
   endpoints: () => ({}), // endpoints будут добавляться через injectEndpoints

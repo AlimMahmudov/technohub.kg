@@ -11,12 +11,15 @@ import TextSkeleton from "../skeleton/TextSkeleton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { TitleComponent } from "../ui/text/TitleComponent";
+import { toast, ToastContainer } from "react-toastify";
+import { RiDiscountPercentFill } from "react-icons/ri";
 
 interface IMessage {
   phone_number: string;
   full_name: string;
   email: string;
   description: string;
+  total_sum: number;
   products: {
     id: number;
     quantity: number;
@@ -43,13 +46,18 @@ const Basket = () => {
 
     const payload: IMessage = {
       ...formData,
+      total_sum: total,
       products,
     };
 
     try {
       await axios.post("http://16.170.143.10/store/cart-callback/", payload);
       reset();
-      alert("Форма успешно отправлена!");
+      toast.success("Форма успешно отправлена!", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
       alert("Произошла ошибка при отправке формы.");
@@ -69,10 +77,13 @@ const Basket = () => {
     );
 
   const total =
-    data?.reduce(
-      (sum, item) => sum + (item.product?.price ?? 0) * item.quantity,
-      0
-    ) ?? 0;
+    data?.reduce((sum, item) => {
+      const hasDiscount = item.product.discount > 0;
+      const price = hasDiscount
+        ? Math.round(item.product.price * (1 - item.product.discount / 100))
+        : item.product?.price ?? 0;
+      return sum + price * item.quantity;
+    }, 0) ?? 0;
 
   const handleIncrement = (
     id: number,
@@ -139,9 +150,21 @@ const Basket = () => {
 
                   <div className="mt-2 md:mt-0 w-full flex items-center">
                     <div className="flex items-center w-full justify-between gap-1">
-                      <h2 className="flex w-full max-w-[200px] text-[18px] font-[500] text-black">
-                        {(el.product?.price ?? 0) * el.quantity} сом
-                      </h2>
+                      <div className="flex">
+                        {el.product.discount > 0 ? (
+                          <TitleComponent className="text-red-600 flex items-center gap-1">
+                            <RiDiscountPercentFill />
+                            {Math.round(
+                              el.product.price * (1 - el.product.discount / 100)
+                            ) * el.quantity}{" "}
+                            сом
+                          </TitleComponent>
+                        ) : (
+                          <h2 className="flex w-full max-w-[200px] text-[18px] font-[500] text-black">
+                            {(el.product?.price ?? 0) * el.quantity} сом
+                          </h2>
+                        )}
+                      </div>
 
                       <div className="md:flex gap-[50px] hidden">
                         <div className="flex items-center justify-center gap-2 px-2">
@@ -269,6 +292,7 @@ const Basket = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

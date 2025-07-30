@@ -65,7 +65,12 @@ const Hero = ({ selectedFilters }: HeroProps) => {
     try {
       await axios.post("http://16.170.143.10/store/order/", dataWithLink);
       reset(); // сброс формы
-      alert("Форма успешно отправлена!");
+      // alert("Форма успешно отправлена!");
+      toast.success("Форма успешно отправлена!", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
       setSelectedCard(null); // закрыть модалку только после успешной отправки
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
@@ -90,26 +95,18 @@ const Hero = ({ selectedFilters }: HeroProps) => {
     let result = [...data].filter((el) => el.discount === 0);
 
     // ✅ Применение фильтров из Menu
-    Object.entries(selectedFilters).forEach(([key, values]) => {
+    (
+      Object.entries(selectedFilters) as [string, (string | number)[]][]
+    ).forEach(([key, values]) => {
       if (values.length > 0) {
         result = result.filter((el) => {
           const elValue = el[key as keyof typeof el];
-
-          // для строк и чисел
-          if (Array.isArray(values)) {
-            return values.includes(String(elValue));
-          }
-          return true;
+          return values.includes(elValue as string | number);
         });
       }
     });
 
     // ✅ Фильтрация по наличию
-    if (showInStock) {
-      result = result.filter((el) => el.in_stock);
-    } else if (showOutOfStock) {
-      result = result.filter((el) => !el.in_stock);
-    }
 
     // ✅ Сортировка
     if (sortAscending) {
@@ -260,14 +257,14 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                       alt="product"
                     />
                     <div className="absolute mt-1 ml-1 flex gap-1">
-                      {!el.in_stock && (
-                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
-                          <h1>Нет в наличии</h1>
-                        </div>
-                      )}
                       {!el.in_composition && (
                         <div className=" bg-blue-600 text-white rounded-[7px] px-1">
                           <h1>Есть на складе</h1>
+                        </div>
+                      )}
+                      {!el.in_stock && (
+                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
+                          <h1>Есть в наличии</h1>
                         </div>
                       )}
                     </div>
@@ -355,10 +352,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                   />
                 </div>
                 <Name className="text-gray-800">{selectedCard.name}</Name>
-                <div className="flex">
-                  <TitleComponent>{selectedCard.price} сом</TitleComponent>
-                  <TitleComponent>{selectedCard.articles} сом</TitleComponent>
-                </div>
+                <TitleComponent>{selectedCard.price} сом</TitleComponent>
               </div>
 
               <form

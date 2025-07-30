@@ -6,6 +6,7 @@ const api = index.injectEndpoints({
       query: () => ({
         url: `/store/contact/`,
         method: "GET",
+        skipAuth: true,
       }),
       providesTags: ["contact"],
     }),
