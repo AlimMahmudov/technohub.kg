@@ -20,14 +20,6 @@ namespace CARDS {
     }[];
   };
 
-  // cpu_cache_mb;
-  // wifi
-  // usb_type_a_count
-  // battery_type
-  // width_mm
-  // thickness_mm
-  // weight_kg
-
   type GetLaptopReq = void;
 
   type GetLaptopDetailRes = {

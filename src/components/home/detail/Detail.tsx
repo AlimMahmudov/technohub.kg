@@ -15,6 +15,9 @@ import { useParams } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface IContact {
   link: string;
   phone_number: string;
@@ -40,11 +43,19 @@ const Detail = () => {
     try {
       await axios.post("http://16.170.143.10/store/order/", dataWithLink);
       reset(); // сброс формы
-      alert("Форма успешно отправлена!");
+      toast.success("Форма успешно отправлена!", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
       closeModal(); // закрыть модалку
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
-      alert("Произошла ошибка при отправке формы.");
+      toast.error("Произошла ошибка при отправке формы.", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     }
   };
 
@@ -164,6 +175,20 @@ const Detail = () => {
                     </Link>
                   </h2>
                 )}
+                <h2>
+                  <span className="text-gray-500">Артикул:</span>{" "}
+                  {data.articles}
+                </h2>
+                {!data.in_composition && (
+                  <h2>
+                    <span className="text-gray-500">На складе:</span> Есть
+                  </h2>
+                )}
+                {!data.in_stock && (
+                  <h2>
+                    <span className="text-gray-500">В наличии:</span> Есть
+                  </h2>
+                )}
                 <Description className="text-gray-600">
                   {data.description}
                 </Description>
@@ -175,9 +200,7 @@ const Detail = () => {
                     <IoCartOutline /> В корзину
                   </button>
                   <button
-                    onClick={() => {
-                      openModal();
-                    }}
+                    onClick={openModal}
                     className="py-2 px-1 rounded-[10px] w-full border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white"
                   >
                     Купить сейчас
@@ -185,6 +208,7 @@ const Detail = () => {
                 </div>
               </div>
             </div>
+
             <div className="w-full flex flex-col rounded-[10px] gap-2 md:bg-white bg-transparent md:border border-none border-gray-200 p-3 md:shadow-md">
               <div>
                 <h1 className="text-[16px] font-[600]">
@@ -260,10 +284,6 @@ const Detail = () => {
                   <span className="text-gray-500">Модель видеокарты:</span>{" "}
                   {data.gpu_model}
                 </p>
-                <p className="text-[16px]">
-                  <span className="text-gray-500">Объем видеопамяти (ГБ):</span>{" "}
-                  {data.gpu_memory} ГБ
-                </p>
               </div>
 
               <div>
@@ -315,7 +335,6 @@ const Detail = () => {
                 </p>
               </div>
             </div>
-            ;
           </div>
         </div>
 
@@ -368,7 +387,7 @@ const Detail = () => {
                     placeholder="Телефон"
                     {...register("phone_number", {
                       required: true,
-                      pattern: /^\+996\d{9}$/, // проверка на формат
+                      pattern: /^\+996\d{9}$/,
                     })}
                     defaultValue="+996"
                   />
@@ -390,6 +409,8 @@ const Detail = () => {
           </div>
         )}
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
