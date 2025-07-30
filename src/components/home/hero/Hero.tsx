@@ -257,13 +257,8 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                       alt="product"
                     />
                     <div className="absolute mt-1 ml-1 flex gap-1">
-                      {!el.in_composition && (
-                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
-                          <h1>Есть на складе</h1>
-                        </div>
-                      )}
                       {!el.in_stock && (
-                        <div className=" bg-blue-600 text-white rounded-[7px] px-1">
+                        <div className=" bg-black text-white rounded-[7px] px-1">
                           <h1>Есть в наличии</h1>
                         </div>
                       )}
@@ -273,7 +268,13 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                     <Name className="text-gray-800">{el.name}</Name>
                     <div className="flex justify-between">
                       <TitleComponent>{el.price} сом</TitleComponent>
-                      <Name>Артикул {el.articles}</Name>
+                    </div>
+                    <div className="flex justify-between">
+                      {!el.in_composition && <h1>Есть на складе</h1>}
+                      <p>
+                        <span className=" text-gray-500">Артикул:</span>{" "}
+                        {el.articles}
+                      </p>
                     </div>
                   </div>
                 </Link>

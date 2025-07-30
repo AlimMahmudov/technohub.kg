@@ -97,8 +97,11 @@ const Discount = () => {
                           {Math.round(el.price * (1 - el.discount / 100))} сом
                         </TitleComponent>
                       </div>
-                      <Name>Артикул {el.articles}</Name>
                     </div>
+                    <p>
+                      <span className=" text-gray-500">Артикул:</span>{" "}
+                      {el.articles}
+                    </p>
                   </div>
                 </Link>
 
