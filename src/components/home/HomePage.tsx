@@ -18,7 +18,7 @@ const HomePage = () => {
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
       />
-      <div className="w-full">
+      <div className="w-full overflow-hidden">
         <Discount />
         <Hero selectedFilters={selectedFilters} />
       </div>
