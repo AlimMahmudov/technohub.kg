@@ -2,7 +2,10 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import { useRegisterUserMutation, useLoginUserMutation } from "@/redux/api/auth";
+import {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+} from "@/redux/api/auth";
 import { ToastContainer, toast } from "react-toastify";
 import { Title } from "../../ui/text/Title";
 import { TitleComponent } from "../../ui/text/TitleComponent";
@@ -82,13 +85,19 @@ const Register = () => {
       <div className="w-full flex justify-center md:px-5 px-0 mt-[70px]">
         <div className="md:w-[40%] w-full flex flex-col items-center md:px-5 py-2 gap-5 p-2 rounded-[10px] border border-gray-300 shadow-md">
           <div className="w-full flex flex-col gap-2 items-center text-center">
-            <TitleComponent className="text-[20px]">Создайте аккаунт</TitleComponent>
+            <TitleComponent className="text-[20px]">
+              Создайте аккаунт
+            </TitleComponent>
             <Description>
-              Зарегистрируйтесь, чтобы оформлять заказы, сохранять избранные товары и получать персональные предложения.
+              Зарегистрируйтесь, чтобы оформлять заказы, сохранять избранные
+              товары и получать персональные предложения.
             </Description>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full flex flex-col gap-3"
+          >
             <input
               type="text"
               className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-300"
@@ -109,7 +118,8 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="w-full py-2 flex justify-center items-center bg-black text-white rounded-[10px]">
+              className="w-full py-2 flex justify-center items-center bg-black text-white rounded-[10px]"
+            >
               Создать
             </button>
           </form>

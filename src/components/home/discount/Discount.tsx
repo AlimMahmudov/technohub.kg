@@ -11,12 +11,30 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+
+const NextArrow = ({ onClick }: { onClick?: () => void }) => (
+  <button
+    className="absolute w-[45px] h-[45px] flex items-center justify-center text-[20px] top-1/2 right-[-45px] z-10 transform -translate-y-1/2 bg-gray-400 text-white p-2 rounded-full"
+    onClick={onClick}
+  >
+    <FaChevronRight />
+  </button>
+);
+
+const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
+  <button
+    className="absolute w-[45px] h-[45px] flex items-center justify-center text-[20px] top-1/2 left-[-45px] z-10 transform -translate-y-1/2 bg-gray-400 text-white p-2 rounded-full"
+    onClick={onClick}
+  >
+    <FaChevronLeft />
+  </button>
+);
 
 const settings = {
   infinite: true,
@@ -25,8 +43,9 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
-  arrows: false,
   centerMode: false,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
 };
 
 const Discount = () => {
@@ -57,11 +76,11 @@ const Discount = () => {
     <div className="container">
       <ToastContainer theme="colored" />
       <div className="w-full md:px-5 px-0 mt-[20px] relative">
-        <h1 className="text-[23px] font-semibold">Скидки на ноутбуки</h1>
+        <h1 className="text-[24px] font-semibold">Скидки на ноутбуки</h1>
       </div>
 
-      <div className="w-full py-5 md:px-5 px-0 overflow-hidden">
-        <Slider {...settings} className="flex gap-[10px]">
+      <div className="w-full py-5 md:px-5 px-0 overflow-hidden relative flex justify-center">
+        <Slider {...settings} className="flex gap-[10px] w-[96%]">
           {discounted.map((el) => (
             <div key={el.id}>
               <div className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md mx-[5px]">
