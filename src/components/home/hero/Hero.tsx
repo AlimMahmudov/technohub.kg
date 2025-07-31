@@ -64,14 +64,13 @@ const Hero = ({ selectedFilters }: HeroProps) => {
 
     try {
       await axios.post("http://16.170.143.10/store/order/", dataWithLink);
-      reset(); // сброс формы
-      // alert("Форма успешно отправлена!");
+      reset();
       toast.success("Форма успешно отправлена!", {
         position: "top-right",
         autoClose: 3000,
         theme: "colored",
       });
-      setSelectedCard(null); // закрыть модалку только после успешной отправки
+      setSelectedCard(null);
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
       alert("Произошла ошибка при отправке формы.");
@@ -94,7 +93,6 @@ const Hero = ({ selectedFilters }: HeroProps) => {
 
     let result = [...data].filter((el) => el.discount === 0);
 
-    // ✅ Применение фильтров из Menu
     (
       Object.entries(selectedFilters) as [string, (string | number)[]][]
     ).forEach(([key, values]) => {
@@ -106,9 +104,12 @@ const Hero = ({ selectedFilters }: HeroProps) => {
       }
     });
 
-    // ✅ Фильтрация по наличию
+    if (showInStock) {
+      result = result.filter((el) => el.in_stock === true);
+    } else if (showOutOfStock) {
+      result = result.filter((el) => el.in_stock === false);
+    }
 
-    // ✅ Сортировка
     if (sortAscending) {
       result.sort((a, b) => a.price - b.price);
     } else if (sortDescending) {
@@ -144,7 +145,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
       <ToastContainer theme="colored" />
       <div className="w-full md:px-5 px-0 mt-[20px] relative">
         <div className="w-full gap-1 rounded-[10px] p-0 md:p-3 flex items-center justify-between flex-wrap">
-          <Title>Ноутбуки в Бишкеке, Кыргызстане</Title>
+          <Title>Ноутбуки TechnoHub_kg</Title>
 
           <div className="relative">
             <button

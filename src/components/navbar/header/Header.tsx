@@ -11,7 +11,7 @@ import { RiUserLine } from "react-icons/ri";
 import { useGetUserQuery, useLoautUserMutation } from "@/redux/api/auth";
 import { useGetBasketQuery } from "@/redux/api/laptop";
 import Image from "next/image";
-import logo from "@/shared/image/logo_tech2 (1).jpg";
+import logo from "@/shared/image/logo_techno2.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,14 +62,14 @@ const Header = () => {
 
               <Link
                 href={PAGE.HOME}
-                className="text-[#999999]  text-[24px] md:w-[90%] w-full flex items-center gap-1 text-center md:text-start "
+                className="text-[#999999]  text-[24px] md:w-[90%] w-full font-[600] flex items-center gap-1 text-center md:text-start "
               >
                 <Image
-                  className=" w-[50px] rounded-[50px]"
+                  className=" w-[120px] rounded-[50px]"
                   src={logo}
                   alt="img"
                 />
-                TECHNOHUB
+                TechnoHub_kg
               </Link>
 
               <div className="md:flex hidden gap-6 justify-center  w-full">

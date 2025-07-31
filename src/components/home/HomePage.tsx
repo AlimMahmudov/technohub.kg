@@ -20,7 +20,7 @@ const HomePage = () => {
       />
       <div className="w-full overflow-hidden">
         <Discount />
-        <Hero selectedFilters={selectedFilters} />
+        <Hero selectedFilters={selectedFilters} />z
       </div>
     </div>
   );

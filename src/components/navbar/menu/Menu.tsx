@@ -18,6 +18,7 @@ export default function Menu({
   setSelectedFilters,
 }: MenuProps) {
   const { data = [] } = useGetLaptopQuery();
+  console.log(data, "dataadata");
 
   // Фильтруем данные, убираем те, у которых есть discount
   const filteredData = data.filter((item) => !item.discount);
@@ -48,10 +49,10 @@ export default function Menu({
 
     return [
       {
-        title: "brend",
+        icon: <FaTags />,
+        title: "Бренд",
         field: "brand",
         options: getUnique<number>("brand"),
-        icon: <FaTags />,
       },
       {
         icon: <MdMonitor />,
