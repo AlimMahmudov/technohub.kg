@@ -1,12 +1,13 @@
+"use client";
 import HomePage from "@/components/home/HomePage";
 import React from "react";
 
 const Home = () => {
-  return (
-    <div>
-      <HomePage />
-    </div>
-  );
+	return (
+		<div>
+			<HomePage />
+		</div>
+	);
 };
 
 export default Home;

@@ -15,6 +15,7 @@ const api = index.injectEndpoints({
         url: "/accounts/register/",
         method: "POST",
         body: data,
+        skipAuth: true, 
       }),
       invalidatesTags: ["auth"],
     }),
