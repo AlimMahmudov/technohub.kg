@@ -1,6 +1,6 @@
 "use client";
 import { FC, ReactNode } from "react";
-import Header from "./header/Header";
+// import Header from "./header/Header";
 import { usePathname } from "next/navigation";
 import { PAGE } from "@/config/pages/public-page.config";
 import { FaWhatsapp } from "react-icons/fa";
@@ -21,9 +21,11 @@ const LayoutPage: FC<LayoutPageProps> = ({ children }) => {
     pathname === PAGE.FORGOT ||
     pathname === PAGE.CONFIRM;
 
+  // const isHeroPage = pathname === PAGE.HERO;
+
   return (
     <div className="flex flex-col justify-between min-h-[100vh] bg-[#f3f2f2]">
-      {!isAuthPage && <Header />}
+      {/* {!isAuthPage && !isHeroPage && <Header />} */}
       <div className="flex w-full">
         <main
           className={`w-full bg-[#f3f2f2] ${

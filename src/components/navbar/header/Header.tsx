@@ -51,7 +51,7 @@ const Header = () => {
         <div className="container">
           <div className="flex justify-between py-2 items-center">
             <div className="flex items-center  justify-between   w-full">
-              <div className="md:hidden text-white flex w-full">
+              <div className="md:hidden text-white flex w-[20%]">
                 <button
                   onClick={toggleBox}
                   className="flex items-center justify-center text-[26px] font-[800]"
@@ -62,10 +62,10 @@ const Header = () => {
 
               <Link
                 href={PAGE.HOME}
-                className="text-[#999999]  text-[24px] md:w-[90%] w-full font-[600] flex items-center gap-1 text-center md:text-start "
+                className="text-[#999999]  text-[20px] md:w-[90%] w-full font-[600] flex items-center gap-1 text-center md:text-start "
               >
                 <Image
-                  className=" w-[120px] rounded-[50px]"
+                  className=" md:w-[120px] w-[60px] rounded-[50px]"
                   src={logo}
                   alt="img"
                 />
@@ -84,7 +84,7 @@ const Header = () => {
                 ))}
               </div>
 
-              <div className="flex gap-2 md:w-[90%] w-full justify-end  ">
+              <div className="flex gap-2 md:w-[90%] w-[20%] justify-end  ">
                 <div className=" relative">
                   <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
                     <Link href={PAGE.BASKET}>
