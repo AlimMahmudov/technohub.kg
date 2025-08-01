@@ -15,7 +15,10 @@ const HomePage = () => {
 
   return (
     <div className="w-full">
-      <Header />
+      <Header
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
       <div className="flex w-full">
         <Menu
           selectedFilters={selectedFilters}
@@ -23,7 +26,7 @@ const HomePage = () => {
         />
         <div className="w-full overflow-hidden">
           <Discount />
-          <Hero selectedFilters={selectedFilters} />z
+          <Hero selectedFilters={selectedFilters} />
         </div>
       </div>
     </div>
