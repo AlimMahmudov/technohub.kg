@@ -16,15 +16,20 @@ interface FilterState {
   [key: string]: (string | number)[];
 }
 
+interface BurgerMenuProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  selectedFilters: FilterState;
+  setSelectedFilters: React.Dispatch<React.SetStateAction<FilterState>>;
+}
+
 const BurgerMenu = ({
   isOpen,
   setIsOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}) => {
+  selectedFilters,
+  setSelectedFilters,
+}: BurgerMenuProps) => {
   const [openSections, setOpenSections] = useState<string | null>(null);
-  const [selectedFilters, setSelectedFilters] = useState<FilterState>({});
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) => (prev === title ? null : title));
@@ -52,7 +57,6 @@ const BurgerMenu = ({
 
   const filteredData = data.filter((item) => !item.discount);
 
-  // Функция для уникальных значений по ключу
   const filters = useMemo(() => {
     const getUnique = <T,>(key: keyof (typeof filteredData)[0]): T[] =>
       Array.from(new Set(filteredData.map((item) => item[key] as T))).filter(
@@ -105,7 +109,6 @@ const BurgerMenu = ({
     ];
   }, [filteredData]);
 
-  // Обработчик изменения чекбоксов
   const handleCheckboxChange = (field: string, value: string | number) => {
     setSelectedFilters((prev) => {
       const current = prev[field] || [];
