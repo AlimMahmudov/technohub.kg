@@ -10,31 +10,13 @@ import {
 } from "@/redux/api/laptop";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-const NextArrow = ({ onClick }: { onClick?: () => void }) => (
-  <button
-    className="absolute w-[45px] h-[45px] flex items-center justify-center text-[20px] top-1/2 right-[-45px] z-10 transform -translate-y-1/2 bg-gray-400 text-white p-2 rounded-full"
-    onClick={onClick}
-  >
-    <FaChevronRight />
-  </button>
-);
-
-const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
-  <button
-    className="absolute w-[45px] h-[45px] flex items-center justify-center text-[20px] top-1/2 left-[-45px] z-10 transform -translate-y-1/2 bg-gray-400 text-white p-2 rounded-full"
-    onClick={onClick}
-  >
-    <FaChevronLeft />
-  </button>
-);
 
 const settings = {
   infinite: true,
@@ -44,8 +26,29 @@ const settings = {
   autoplay: true,
   autoplaySpeed: 3000,
   centerMode: false,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
+  arrows: false,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+// Тип для метода слайдера (частичный интерфейс, достаточно только нужных методов)
+type SliderInstance = {
+  slickNext: () => void;
+  slickPrev: () => void;
 };
 
 const Discount = () => {
@@ -56,6 +59,8 @@ const Discount = () => {
   const [selectedCard, setSelectedCard] = useState<
     null | NonNullable<typeof data>[0]
   >(null);
+
+  const sliderRef = useRef<SliderInstance | null>(null);
 
   const discounted = data?.filter((el) => el.discount > 0) || [];
 
@@ -79,8 +84,22 @@ const Discount = () => {
         <h1 className="text-[24px] font-semibold">Скидки на ноутбуки</h1>
       </div>
 
-      <div className="w-full py-5 md:px-5 px-0 overflow-hidden relative flex justify-center">
-        <Slider {...settings} className="flex gap-[10px] w-[96%]">
+      <div className="w-full py-5 md:px-5 px-0 overflow-hidden relative flex justify-center items-center">
+        <button
+          onClick={() => sliderRef.current?.slickPrev()}
+          className="w-[45px] h-[45px] flex items-center justify-center text-[20px] bg-gray-400 text-white p-2 rounded-full"
+        >
+          <FaChevronLeft />
+        </button>
+
+        <Slider
+          // задаём callback ref, чтобы тип не ломался
+          ref={(el) => {
+            if (el) sliderRef.current = el as unknown as SliderInstance;
+          }}
+          {...settings}
+          className="flex gap-[10px] w-[100%] md:w-[92%]"
+        >
           {discounted.map((el) => (
             <div key={el.id}>
               <div className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md mx-[5px]">
@@ -165,6 +184,28 @@ const Discount = () => {
             </div>
           ))}
         </Slider>
+
+        <button
+          onClick={() => sliderRef.current?.slickNext()}
+          className="w-[45px] h-[45px] flex items-center justify-center text-[20px] bg-gray-400 text-white p-2 rounded-full"
+        >
+          <FaChevronRight />
+        </button>
+      </div>
+
+      <div className="w-full flex justify-center gap-[30px] lg:hidden">
+        <button
+          onClick={() => sliderRef.current?.slickPrev()}
+          className="w-[45px] h-[45px] flex items-center justify-center text-[20px] bg-gray-400 text-white p-2 rounded-full"
+        >
+          <FaChevronLeft />
+        </button>
+        <button
+          onClick={() => sliderRef.current?.slickNext()}
+          className="w-[45px] h-[45px] flex items-center justify-center text-[20px] bg-gray-400 text-white p-2 rounded-full"
+        >
+          <FaChevronRight />
+        </button>
       </div>
 
       {/* Модалка */}

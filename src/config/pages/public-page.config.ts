@@ -5,6 +5,7 @@ class PublicPage {
   GARANTEE = "/garantee";
   CONTACT = "/contact";
   SERVICE = "/service";
+  HERO = "/hero";
 
   BASKET = "/basket";
 
