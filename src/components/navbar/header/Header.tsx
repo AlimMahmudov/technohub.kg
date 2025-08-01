@@ -13,7 +13,16 @@ import { useGetBasketQuery } from "@/redux/api/laptop";
 import Image from "next/image";
 import logo from "@/shared/image/logo_techno2.png";
 
-const Header = () => {
+export interface FilterState {
+  [key: string]: (string | number)[];
+}
+
+interface HeaderProps {
+  selectedFilters: FilterState;
+  setSelectedFilters: React.Dispatch<React.SetStateAction<FilterState>>;
+}
+
+const Header = ({ selectedFilters, setSelectedFilters }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleBox = () => setIsOpen((prev) => !prev);
 
@@ -124,7 +133,12 @@ const Header = () => {
         </div>
       </div>
 
-      <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+      <BurgerMenu
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
     </header>
   );
 };
