@@ -1,0 +1,41 @@
+export interface IDetail {
+  id: number;
+		name: string;
+		description: string;
+		link: string;
+		price: number;
+		in_composition: boolean;
+		articles: number;
+		in_stock: boolean;
+		discount: number;
+		warranty: number;
+		brand: string;
+		screen_size: number;
+		screen_type: string;
+		resolution: string;
+		refresh_rate: number;
+		operating_system: string;
+		ram_size_gb: number;
+		storage_size_gb: number;
+		storage_type: string;
+		cpu_model: string;
+		cpu_cores: number;
+		cpu_threads: number;
+		cpu_frequency_mhz: number;
+		gpu_model: string;
+		gpu_memory: string;
+		ethernet: boolean;
+		bluetooth: boolean;
+		hdmi_count: boolean;
+		ethernet_port: boolean;
+		audio_jack: boolean;
+		keyboard_backlight: boolean;
+		battery_capacity_wh: number;
+		operation_system: string;
+		laptop_image?: {
+			id: number;
+			image: string | null;
+		}[];
+		slug?: string;
+		keys: string;
+}

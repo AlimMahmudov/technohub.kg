@@ -4,8 +4,8 @@ const CardSkeleton = () => {
 	return (
 		<div className="w-full py-2 md:px-5 px-0 flex flex-cpl md:flex-row gap-2 animate-pulse">
 			<div className="skeleton h-60" />
-			<div className="skeleton h-60" />
-			<div className="skeleton h-60" />
+			{/* <div className="skeleton h-60" />
+			<div className="skeleton h-60" /> */}
 
 			<style jsx>{`
 				.skeleton {

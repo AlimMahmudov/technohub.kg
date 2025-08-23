@@ -14,8 +14,8 @@ const api = index.injectEndpoints({
 			CARDS.GetLaptopDetailRes,
 			CARDS.GetLaptopDetailReq
 		>({
-			query: (id) => ({
-				url: `/store/laptop/${id}`,
+			query: (slug) => ({
+				url: `/store/laptop/${slug}`,
 				method: "GET",
 				skipAuth: true, 
 			}),
