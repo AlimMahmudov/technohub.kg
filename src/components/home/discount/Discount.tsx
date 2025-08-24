@@ -58,7 +58,7 @@ const Discount = () => {
 		};
 
 		try {
-			await axios.post("http://16.170.143.10/store/order/", dataWithLink);
+			await axios.post("https://api.technohub.kg/store/order/", dataWithLink);
 			reset();
 			toast.success("Форма успешно отправлена!", {
 				position: "top-right",

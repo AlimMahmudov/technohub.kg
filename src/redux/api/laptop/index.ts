@@ -59,6 +59,7 @@ const api = index.injectEndpoints({
       }),
       invalidatesTags: ["laptop"],  
     }),
+		
 	}),
 });
 

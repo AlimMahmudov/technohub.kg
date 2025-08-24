@@ -1,22 +1,39 @@
 "use client";
 
+import Header from "@/components/navbar/header/Header";
 import LayoutPage from "@/components/navbar/LayoutPage";
 import { store } from "@/redux/store";
-import { FC, ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { FC, ReactNode, useState } from "react";
 import { Provider } from "react-redux";
 
 interface LayoutPageProps {
-  children: ReactNode;
+	children: ReactNode;
+}
+
+export interface FilterState {
+	[key: string]: (string | number)[];
 }
 
 const Providers: FC<LayoutPageProps> = ({ children }) => {
-  return (
-    <div>
-      <Provider store={store}>
-        <LayoutPage>{children}</LayoutPage>
-      </Provider>
-    </div>
-  );
+	const [selectedFilters, setSelectedFilters] = useState<FilterState>({});
+	const pathname = usePathname();
+
+	const showHeader = pathname !== "/";
+
+	return (
+		<div>
+			<Provider store={store}>
+			{showHeader && (
+				<Header
+					selectedFilters={selectedFilters}
+					setSelectedFilters={setSelectedFilters}
+				/>
+			)}
+				<LayoutPage>{children}</LayoutPage>
+			</Provider>
+		</div>
+	);
 };
 
 export default Providers;

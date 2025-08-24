@@ -26,7 +26,7 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
-      await axios.post("http://16.170.143.10/store/callback/", data);
+      await axios.post("https://api.technohub.kg/store/callback/", data);
       reset();
       alert("Форма успешно отправлена!");
     } catch (error) {

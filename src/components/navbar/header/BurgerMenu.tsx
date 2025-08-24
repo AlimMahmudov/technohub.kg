@@ -11,6 +11,7 @@ import { useGetLaptopQuery } from "@/redux/api/laptop";
 import { FaHdd, FaMemory, FaTags, FaWindows } from "react-icons/fa";
 import { MdMemory, MdMonitor } from "react-icons/md";
 import { GiProcessor } from "react-icons/gi";
+import { usePathname } from "next/navigation";
 
 interface FilterState {
   [key: string]: (string | number)[];
@@ -121,6 +122,9 @@ const BurgerMenu = ({
     });
   };
 
+  const pathname = usePathname();
+
+
   return (
     <div
       id="menu-overlay"
@@ -182,6 +186,7 @@ const BurgerMenu = ({
         </nav>
 
         {/* Фильтры */}
+        {pathname === "/" && (
         <div className="gap-3 w-full flex flex-col mt-4">
           {filters.map((filter) => {
             const isSectionOpen = openSections === filter.title;
@@ -234,6 +239,7 @@ const BurgerMenu = ({
             </div>
           )}
         </div>
+        )}
       </div>
     </div>
   );

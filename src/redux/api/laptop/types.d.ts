@@ -3,7 +3,7 @@ namespace CARDS {
 		id: number;
 		name: string;
 		discount: number;
-		operating_system: string;
+		operating_system: string | null;
 		storage_size_gb: string;
 		in_stock: boolean;
 		screen_size: number;
@@ -11,7 +11,7 @@ namespace CARDS {
 		cpu_model: string;
 		brand: string;
 		gpu_model: string;
-		articles: number;
+		articles: number | null;
 		in_composition: boolean;
 		price: number;
 		laptop_image: {

@@ -21,7 +21,7 @@ const BuyModal = ({ data, onClose }: { data: IDetail; onClose: () => void }) => 
 
   const onSubmit: SubmitHandler<IContact> = async (formData) => {
     try {
-      await axios.post("http://16.170.143.10/store/order/", {
+      await axios.post("https://api.technohub.kg/store/order/", {
         ...formData,
         link: window.location.href,
       });

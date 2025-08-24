@@ -1,7 +1,6 @@
 // src/app/detail/[slug]/page.tsx
 import Detail from "@/components/home/detail/Detail";
 import { IDetail } from "@/components/home/detail/types";
-import HeaderDetail from "@/components/navbar/header/HeaderDetail";
 import { generateMetadata as generateSeoMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 
@@ -35,7 +34,6 @@ export async function generateMetadata({
 const Page = async () => {
   return (
     <>
-      <HeaderDetail />
       <Detail />
     </>
   );

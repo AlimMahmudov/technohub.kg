@@ -1,13 +1,12 @@
-export const PHONE_NUMBER = '+996 708 805 080'
-export const PHONE_NUMBER_WHATSAPP = '+996708805080'
+export const PHONE_NUMBER = ''
+export const PHONE_NUMBER_WHATSAPP = '996708771849'
 
 
-export const WHATSAPP_NUMBER = PHONE_NUMBER
 
-export const EMAIL_ADDRESS = 'info@metallomir.kg'
-export const INSTAGRAM = 'metallo_mir/'
+export const EMAIL_ADDRESS = ''
+export const INSTAGRAM = ''
 
-export const LOCATION = 'г. Бишкек, ул. Л. Толстого 19а'
+export const LOCATION = ''
 
 /// links
 

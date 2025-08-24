@@ -63,7 +63,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
     };
 
     try {
-      await axios.post("http://16.170.143.10/store/order/", dataWithLink);
+      await axios.post("https://api.technohub.kg/store/order/", dataWithLink);
       reset();
       toast.success("Форма успешно отправлена!", {
         position: "top-right",
@@ -142,7 +142,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
 
   return (
     <div className="container">
-      <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" />        
       <div className="w-full md:px-5 px-0 mt-[20px] relative">
         <div className="w-full gap-1 rounded-[10px] p-0 md:p-3 flex items-center justify-between flex-wrap">
           <Title>Ноутбуки TechnoHub_kg</Title>

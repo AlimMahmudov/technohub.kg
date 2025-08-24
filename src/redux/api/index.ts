@@ -58,6 +58,7 @@ export const api = createApi({
     "garantee",
     "auth",
     "service",
+    
   ],
   refetchOnFocus: true,
   refetchOnReconnect: false,
