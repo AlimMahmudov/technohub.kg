@@ -9,11 +9,10 @@ import Image from "next/image";
 import img from "@/assets/images/basket-null.png";
 import TextSkeleton from "../skeleton/TextSkeleton";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
 import { TitleComponent } from "../ui/text/TitleComponent";
 import { toast, ToastContainer } from "react-toastify";
 import { RiDiscountPercentFill } from "react-icons/ri";
-import { useState } from "react"; // Добавьте этот импорт
+import { useState, useEffect } from "react";
 
 interface IMessage {
 	phone_number: string;
@@ -22,16 +21,50 @@ interface IMessage {
 	description: string;
 	total_sum: number;
 	products: {
-		id: number;
+		id: number | string | null; // Изменено: может быть number, string или null
 		quantity: number;
+		name: string;
+		articles: string | null;
 	}[];
 }
 
+interface BasketItem {
+	id: number;
+	quantity: number;
+	product: {
+		id: number;
+		name: string;
+		price: number;
+		discount: number;
+		articles: number | string | null; // Добавлено поле articles
+		laptop_image: { image: string }[];
+	};
+}
+
 const Basket = () => {
-	const { data, isLoading, error, refetch } = useGetBasketQuery(); // Добавьте refetch
+	const { data, isLoading, error } = useGetBasketQuery();
 	const [deleteItem] = useDeleteBasketMutation();
 	const [updateQuantity] = useUpdateQuantityMutation();
-	const [isSubmitting, setIsSubmitting] = useState(false); // Для отслеживания состояния отправки
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [localBasket, setLocalBasket] = useState<BasketItem[]>([]);
+
+	// Синхронизируем локальное состояние с данными из API
+	useEffect(() => {
+		if (data) {
+			console.log("Данные из API:", data);
+			const mappedData: BasketItem[] = data.map((item) => ({
+				...item,
+				product: {
+					...item.product,
+					articles:
+						item.product.articles !== null
+							? String(item.product.articles)
+							: null,
+				},
+			}));
+			setLocalBasket(mappedData);
+		}
+	}, [data]);
 
 	const { register, handleSubmit, reset } =
 		useForm<Omit<IMessage, "products">>();
@@ -39,19 +72,22 @@ const Basket = () => {
 	const onSubmit: SubmitHandler<Omit<IMessage, "products">> = async (
 		formData
 	) => {
-		if (!data || data.length === 0) return;
+		if (!localBasket || localBasket.length === 0) return;
 
 		setIsSubmitting(true);
 
-		const products = data
-			.map((item) => {
-				if (!item.product.articles) return null;
-				return {
-					id: item.product.articles,
-					quantity: item.quantity,
-				};
-			})
-			.filter(Boolean) as { id: number; quantity: number }[];
+		const products = localBasket.map((item) => {
+			return {
+				id: item.product.id,
+				quantity: item.quantity,
+				name: item.product?.name || "Название недоступно",
+				articles:
+					item.product?.articles !== null &&
+					item.product?.articles !== undefined
+						? String(item.product.articles)
+						: null, // соответствует типу string | null
+			};
+		});
 
 		const payload: IMessage = {
 			...formData,
@@ -60,31 +96,70 @@ const Basket = () => {
 		};
 
 		try {
-			await axios.post(
-				"https://api.technohub.kg/store/cart-callback/",
-				payload
+			// Выводим все данные в консоль
+			console.log("Данные для отправки:", {
+				phone_number: payload.phone_number,
+				full_name: payload.full_name,
+				email: payload.email,
+				description: payload.description,
+				total_sum: payload.total_sum,
+				products: payload.products.map((product) => ({
+					id: product.id,
+					quantity: product.quantity,
+					name: product.name,
+				})),
+			});
+
+			// Отправка в Telegram
+			const token = process.env.NEXT_PUBLIC_TG_TOKEN;
+			const chatId = process.env.NEXT_PUBLIC_TG_CHAT_ID;
+
+			// Форматируем список товаров
+			const productsText = payload.products.map(
+				(product) =>
+					`\n \n 💻${product.name} 
+				 \n📑 Артикул: ${product.articles ?? "Не указан"}
+				  \n страница: https://www.technohub.kg/detail/${product.id}
+					 \n количество: ${product.quantity} шт.
+					 \n ____________________________________________`
 			);
 
-			// Удаляем все элементы корзины по одному
-			const deletePromises = data.map((item) => deleteItem(item.id).unwrap());
-			await Promise.all(deletePromises);
+			const text = `
+		🛒 Новая заявка из корзины: \n
+		👤 Имя: ${payload.full_name}
+		📞 Телефон: ${payload.phone_number}
+		📧 Email: ${payload.email || "Не указан"}
+		💬 Сообщение: ${payload.description}
+		💰 Общая сумма: ${payload.total_sum} сом\n
+		 Товары: 
 
-			// Перезагружаем данные корзины
+		${productsText}
+				`;
+
+			const res = await fetch(
+				`https://api.telegram.org/bot${token}/sendMessage`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						chat_id: chatId,
+						text: text,
+						parse_mode: "HTML",
+					}),
+				}
+			);
+
+			if (!res.ok) throw new Error("Ошибка при отправке в Telegram");
 
 			reset();
-			toast.success("Форма успешно отправлена! Корзина очищена.", {
+			toast.success("Заявка успешно отправлена!", {
 				position: "top-right",
 				autoClose: 3000,
 				theme: "colored",
 			});
-
-      setTimeout(() => {
-        refetch();
-      }, 500);
-
 		} catch (error) {
-			console.error("Ошибка при отправке формы:", error);
-			toast.error("Произошла ошибка при отправке формы.", {
+			console.error("Ошибка при обработке формы:", error);
+			toast.error("Произошла ошибка при отправке заявки.", {
 				position: "top-right",
 				autoClose: 3000,
 				theme: "colored",
@@ -96,7 +171,7 @@ const Basket = () => {
 
 	if (isLoading) return <TextSkeleton />;
 
-	if (!isLoading && (error || !data?.length))
+	if (!isLoading && (error || !localBasket.length))
 		return (
 			<div className="w-full h-[100vh] justify-center items-center py-10">
 				<div className="container flex flex-col justify-center items-center">
@@ -106,42 +181,86 @@ const Basket = () => {
 			</div>
 		);
 
-	const total =
-		data?.reduce((sum, item) => {
-			const hasDiscount = item.product.discount > 0;
-			const price = hasDiscount
-				? Math.round(item.product.price * (1 - item.product.discount / 100))
-				: item.product?.price ?? 0;
-			return sum + price * item.quantity;
-		}, 0) ?? 0;
+	const total = localBasket.reduce((sum, item) => {
+		const hasDiscount = item.product.discount > 0;
+		const price = hasDiscount
+			? Math.round(item.product.price * (1 - item.product.discount / 100))
+			: item.product?.price ?? 0;
+		return sum + price * item.quantity;
+	}, 0);
 
-	const handleIncrement = (
+	const handleIncrement = async (
 		id: number,
 		currentQuantity: number,
 		productId: number
 	) => {
-		updateQuantity({
-			id,
-			quantity: currentQuantity + 1,
-			product_id: productId,
-		});
+		try {
+			// Обновляем на бэкенде
+			await updateQuantity({
+				id,
+				quantity: currentQuantity + 1,
+				product_id: productId,
+			}).unwrap();
+
+			// Обновляем локальное состояние
+			setLocalBasket((prevBasket) =>
+				prevBasket.map((item) =>
+					item.id === id ? { ...item, quantity: currentQuantity + 1 } : item
+				)
+			);
+		} catch (error) {
+			console.error("Ошибка при увеличении количества:", error);
+			toast.error("Ошибка при обновлении количества", {
+				position: "top-right",
+				autoClose: 3000,
+				theme: "colored",
+			});
+		}
 	};
 
-	const handleDecrement = (
+	const handleDecrement = async (
 		id: number,
 		currentQuantity: number,
 		productId: number
 	) => {
 		if (currentQuantity > 1) {
-			updateQuantity({
-				id,
-				quantity: currentQuantity - 1,
-				product_id: productId,
-			});
+			try {
+				// Обновляем на бэкенде
+				await updateQuantity({
+					id,
+					quantity: currentQuantity - 1,
+					product_id: productId,
+				}).unwrap();
+
+				// Обновляем локальное состояние
+				setLocalBasket((prevBasket) =>
+					prevBasket.map((item) =>
+						item.id === id ? { ...item, quantity: currentQuantity - 1 } : item
+					)
+				);
+			} catch (error) {
+				console.error("Ошибка при уменьшении количества:", error);
+				toast.error("Ошибка при обновлении количества", {
+					position: "top-right",
+					autoClose: 3000,
+					theme: "colored",
+				});
+			}
 		}
 	};
 
-	const sortedData = [...data].sort((a, b) => a.id - b.id);
+	const handleDelete = async (id: number) => {
+		try {
+			await deleteItem(id).unwrap();
+			setLocalBasket((prevBasket) =>
+				prevBasket.filter((item) => item.id !== id)
+			);
+		} catch (error) {
+			console.error("Ошибка при удалении товара:", error);
+		}
+	};
+
+	const sortedData = [...localBasket].sort((a, b) => a.id - b.id);
 
 	return (
 		<div className="container">
@@ -156,7 +275,7 @@ const Basket = () => {
 					{sortedData.map((el) => (
 						<div
 							className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
-							key={el.id}>
+							key={`basket-${el.product.id}-${el.id}`}>
 							<div className="flex md:gap-10 gap-3">
 								<div className="w-[180px] h-[80px] rounded-[10px] overflow-hidden">
 									<Image
@@ -195,7 +314,7 @@ const Basket = () => {
 												)}
 											</div>
 
-											<div className="md:flex gap-[50px] hidden">
+											<div className="md:flex  gap-[50px] hidden">
 												<div className="flex items-center justify-center gap-2 px-2">
 													<button
 														onClick={() =>
@@ -220,7 +339,7 @@ const Basket = () => {
 
 												<button
 													className="px-2 py-1 rounded-[5px] text-white bg-red-500 font-normal"
-													onClick={() => deleteItem(el.id)}>
+													onClick={() => handleDelete(el.id)}>
 													Удалить
 												</button>
 											</div>
@@ -228,13 +347,13 @@ const Basket = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex md:hidden gap-[10px] w-full justify-between">
-								<div className="flex w-[180px] items-center justify-start gap-2">
+							<div className="flex gap-[20px] md:hidden">
+								<div className="flex items-center   justify-center gap-2 px-2">
 									<button
 										onClick={() =>
 											handleDecrement(el.id, el.quantity, el.product.id)
 										}
-										className="w-8 h-6 flex justify-center items-center text-lg border bg-gray-200 border-gray-400 rounded">
+										className="w-6 h-6 flex justify-center items-center text-lg border bg-gray-200 border-gray-400 rounded">
 										–
 									</button>
 
@@ -246,14 +365,14 @@ const Basket = () => {
 										onClick={() =>
 											handleIncrement(el.id, el.quantity, el.product.id)
 										}
-										className="w-8 h-6 flex justify-center items-center text-lg border bg-gray-200 border-gray-400 rounded">
+										className="w-6 h-6 flex justify-center items-center text-lg border bg-gray-200 border-gray-400 rounded">
 										+
 									</button>
 								</div>
 
 								<button
-									className="px-2 py-1 rounded-[5px] w-full text-white bg-red-500 font-normal"
-									onClick={() => deleteItem(el.id)}>
+									className="px-2 py-1 w-full rounded-[5px] text-white bg-red-500 font-normal"
+									onClick={() => handleDelete(el.id)}>
 									Удалить
 								</button>
 							</div>
@@ -298,6 +417,12 @@ const Basket = () => {
 									pattern: /^\+996\d{9}$/,
 								})}
 								defaultValue="+996"
+							/>
+							<input
+								className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"
+								type="email"
+								placeholder="Email"
+								{...register("email")}
 							/>
 							<textarea
 								className="bg-white rounded-[10px] w-full py-2 px-3 outline-none border border-gray-400"

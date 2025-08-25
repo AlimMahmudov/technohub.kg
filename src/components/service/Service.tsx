@@ -48,7 +48,7 @@ const Service = () => {
 
   return (
     <div className="container">
-      <div className="w-full h-full   py-2 md:px-5 px-0">
+      <div className="w-full h-full min-h-[75vh] py-2 md:px-5 px-0">
         {processedDescription && (
           <div dangerouslySetInnerHTML={{ __html: processedDescription }} />
         )}
@@ -69,8 +69,8 @@ const Service = () => {
           transform: scale(1.02);
         }
       `}</style>
-      <div className="w-full flex justify-center pb-10">
-        <div className="w-full md:w-[60%]    mt-[130px] flex flex-col gap-1 bg-white rounded-[10px]">
+      <div className="w-full flex justify-center mt-[50px] pb-10">
+        <div className="w-full md:w-[60%] h-fit md:sticky top-[100px] flex flex-col gap-1 bg-white rounded-[10px]">
           <div className="w-full h-full bg-white rounded-[10px] flex flex-col items-center gap-4 justify-between border border-gray-300 p-3">
             <div className="w-full flex text-center flex-col items-center">
               <TitleComponent>Оставьте заявку!...</TitleComponent>
