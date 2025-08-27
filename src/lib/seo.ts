@@ -45,7 +45,7 @@ export const generateMetadata = ({
 	},
 	// Добавляем дополнительные мета-теги
 	other: {
-			"theme-color": "#0000ff",
+			"theme-color": "#000000",
 			"apple-mobile-web-app-capable": "yes",
 			"apple-mobile-web-app-status-bar-style": "black-translucent",
 	}
