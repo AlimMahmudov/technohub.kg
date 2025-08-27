@@ -50,8 +50,7 @@ const Basket = () => {
 
 	// Синхронизируем локальное состояние с данными из API
 	useEffect(() => {
-		if (data) {
-			console.log("Данные из API:", data);
+		if (data && localBasket.length === 0) {
 			const mappedData: BasketItem[] = data.map((item) => ({
 				...item,
 				product: {
@@ -65,6 +64,7 @@ const Basket = () => {
 			setLocalBasket(mappedData);
 		}
 	}, [data]);
+	
 
 	const { register, handleSubmit, reset } =
 		useForm<Omit<IMessage, "products">>();
@@ -260,7 +260,7 @@ const Basket = () => {
 		}
 	};
 
-	const sortedData = [...localBasket].sort((a, b) => a.id - b.id);
+	// const sortedData = [...localBasket].sort((a, b) => a.id - b.id);
 
 	return (
 		<div className="container">
@@ -272,10 +272,10 @@ const Basket = () => {
 
 			<div className="w-full py-5 md:px-5 px-0">
 				<div className="flex flex-col gap-[10px] w-full">
-					{sortedData.map((el) => (
+					{localBasket.map((el) => (
 						<div
 							className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md"
-							key={`basket-${el.product.id}-${el.id}`}>
+							key={el.id} >
 							<div className="flex md:gap-10 gap-3">
 								<div className="w-[180px] h-[80px] rounded-[10px] overflow-hidden">
 									<Image
