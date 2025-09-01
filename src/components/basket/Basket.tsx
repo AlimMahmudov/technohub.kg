@@ -63,7 +63,7 @@ const Basket = () => {
 			}));
 			setLocalBasket(mappedData);
 		}
-	}, [data]);
+	}, [data, localBasket.length]);
 	
 
 	const { register, handleSubmit, reset } =

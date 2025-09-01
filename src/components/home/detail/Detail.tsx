@@ -21,6 +21,8 @@ const Detail = () => {
 	const { data } = useDetailLaptopQuery(slug);
 	const { data: basketData } = useGetBasketQuery();
 
+	console.log(data, "data");
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [addToCart] = usePostBasketMutation();
 	const [updateQuantity] = useUpdateQuantityMutation();
@@ -80,7 +82,18 @@ const Detail = () => {
 								<IoCartOutline /> В корзину
 							</button>
 							<button
-								onClick={() => setIsModalOpen(true)}
+								onClick={() => {
+									const isAuthenticated =
+										typeof window !== "undefined" &&
+										localStorage.getItem("access");
+
+									if (!isAuthenticated) {
+										error();
+										return;
+									}
+
+									setIsModalOpen(true);
+								}}
 								className="py-2 px-1 rounded-[10px] w-full border border-gray-200 flex items-center justify-center gap-1 bg-[#141414] text-white">
 								Купить сейчас
 							</button>
