@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 
-Sitemap: https://technohub-kg.vercel.app/sitemap.xml
+Sitemap: https://www.technohub.kg/sitemap.xml
