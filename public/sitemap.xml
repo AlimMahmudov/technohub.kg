@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Главная страница -->
   <url>
-    <loc>https://technohub-kg.vercel.app/</loc>
+    <loc>https://technohub.kg/</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://technohub-kg.vercel.app/about</loc>
+    <loc>https://technohub.kg/about</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://technohub-kg.vercel.app/delivery</loc>
+    <loc>https://technohub.kg/delivery</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://technohub-kg.vercel.app/garantee</loc>
+    <loc>https://technohub.kg/garantee</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://technohub-kg.vercel.app/service</loc>
+    <loc>https://technohub.kg/service</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://technohub-kg.vercel.app/contact</loc>
+    <loc>https://technohub.kg/contact</loc>
     <lastmod>2025-08-25</lastmod>
     <priority>1.0</priority>
   </url>
