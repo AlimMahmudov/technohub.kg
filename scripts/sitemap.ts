@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	];
 
 	const stream = new SitemapStream({
-		hostname: "https://technohub-kg.vercel.app/",
+		hostname: "https://technohub.kg/",
 	});
 	res.writeHead(200, { "Content-Type": "application/xml" });
 
