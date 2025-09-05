@@ -15,7 +15,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 import { SubmitHandler, useForm } from "react-hook-form";
-import axios from "axios";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -43,22 +42,46 @@ const Discount = () => {
 		phone_number: string;
 		full_name: string;
 		description: string;
+		product_id: string;
+		name: string;
+		articles: number;
+		id: string;
 	}
 
-  const prevRef = useRef<HTMLButtonElement>(null);
+	const prevRef = useRef<HTMLButtonElement>(null);
 	const nextRef = useRef<HTMLButtonElement>(null);
 	const swiperRef = useRef<SwiperType | null>(null);
 
 	const { register, handleSubmit, reset } = useForm<IContact>();
 
 	const onSubmit: SubmitHandler<IContact> = async (formData) => {
-		const dataWithLink = {
-			...formData,
-			link: "https://github.com/AlimMahmudov/technohub.kg",
-		};
-
+		if (!selectedCard) return;
+	
+		const message = `
+	Новая заявка обратной связи: 
+	
+	👤 Имя: ${formData.full_name}
+	📞 Телефон: ${formData.phone_number}
+	📝 Сообщение: ${formData.description}
+	💻 Ноутбук: ${selectedCard.name}
+	📑 Артикул: ${selectedCard.articles || "Не указан"}
+	🆔 ID: https://www.technohub.kg/detail/${selectedCard.id}
+		`;
+	
 		try {
-			await axios.post("https://api.technohub.kg/store/order/", dataWithLink);
+			await fetch(
+				`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TG_TOKEN}/sendMessage`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						chat_id: process.env.NEXT_PUBLIC_TG_CHAT_ID,
+						text: message,
+						parse_mode: "HTML",
+					}),
+				}
+			);
+	
 			reset();
 			toast.success("Форма успешно отправлена!", {
 				position: "top-right",
@@ -67,10 +90,11 @@ const Discount = () => {
 			});
 			setSelectedCard(null);
 		} catch (error) {
-			console.error("Ошибка при отправке формы:", error);
-			alert("Произошла ошибка при отправке формы.");
+			console.error("Ошибка при отправке в Telegram:", error);
+			toast.error("Произошла ошибка при отправке формы", { theme: "colored" });
 		}
 	};
+	
 
 	const error = () => {
 		toast.error("⚠️ Пожалуйста, авторизуйтесь перед добавлением в корзину", {
@@ -85,14 +109,14 @@ const Discount = () => {
 
 	if (isLoading) return <CardSkeleton />;
 
+	console.log(data, "Discount");
+
 	return (
 		<div className="container">
 			<ToastContainer theme="colored" />
 			<div className="w-full md:px-5 px-0 mt-[20px] relative">
 				<h1 className="text-[24px] font-semibold">Скидки на ноутбуки</h1>
 			</div>
-
-			 
 
 			<div className="w-full py-5 md:px-5 px-0 overflow-hidden relative flex justify-center items-center">
 				<Swiper
@@ -115,11 +139,11 @@ const Discount = () => {
 					spaceBetween={20}
 					freeMode={true}
 					loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          modules={[FreeMode, Navigation, Autoplay]}
+					autoplay={{
+						delay: 3000,
+						disableOnInteraction: false,
+					}}
+					modules={[FreeMode, Navigation, Autoplay]}
 					breakpoints={{
 						768: {
 							slidesPerView: 3,
@@ -211,7 +235,7 @@ const Discount = () => {
 				</Swiper>
 			</div>
 
-      <div className="flex border-b pb-4 border-[#cacaca] justify-end gap-3 my-5">
+			<div className="flex border-b pb-4 border-[#cacaca] justify-end gap-3 my-5">
 				<button
 					ref={prevRef}
 					className="rounded-[50px] border p-2 text-[#666666] hover:text-[#202020] hover:border-[#202020]"

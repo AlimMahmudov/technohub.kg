@@ -14,7 +14,7 @@ export async function generateMetadata({
   const { slug } = await params;
   
   const res = await fetch(
-    `https://api.technohub.kg/store/laptop/${slug}`,
+    `https://api.technohub.com.kg/store/laptop/${slug}`,
     { next: { revalidate: 60 } }
   );
   const data: IDetail = await res.json();
@@ -22,7 +22,7 @@ export async function generateMetadata({
   return generateSeoMetadata({
     title: data.name ?? "Technohub.kg",
     description: data.description ?? "Technohub.kg - магазин электроники",
-    url: `https://technohub-kg.vercel.app/detail/${slug}`,
+    url: `https://www.technohub.kg/detail/${slug}`,
     image:
       data.laptop_image?.[0]?.image ??
       "https://images.prom.ua/6134218801_w600_h600_6134218801.jpg",

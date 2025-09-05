@@ -56,10 +56,10 @@ export const generateStructuredData = () => ({
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
 	'name': 'TechnoHub.kg',
-	'url': 'https://technohub-kg.vercel.app/',
+	'url': 'https://www.technohub.kg/',
 	'potentialAction': {
 			'@type': 'SearchAction',
-			'target': 'https://technohub-kg.vercel.app/search?q={search_term_string}',
+			'target': 'https://www.technohub.kg/search?q={search_term_string}',
 			'query-input': 'required name=search_term_string'
 	}
 });

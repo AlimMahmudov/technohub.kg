@@ -37,7 +37,7 @@ const BuyModal = ({
   📝 Сообщение: ${formData.description}
   💻 Ноутбук: ${data.name}
   📑 Артикул: ${data.articles ?? "Не указан"}
-  🆔 ID: https://www.technohub.kg/detail${data.id}`;
+  🆔 ID: https://www.technohub.kg/detail/${data.id}`;
 
 			const res = await fetch(
 				`https://api.telegram.org/bot${token}/sendMessage`,

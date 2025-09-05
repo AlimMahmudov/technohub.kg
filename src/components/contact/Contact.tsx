@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useGetContactQuery } from "@/redux/api/contact";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 const BASE_URL = process.env.NEXT_PUBLIC_API || "";
@@ -26,12 +28,20 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
-      await axios.post("https://api.technohub.kg/store/callback/", data);
+      await axios.post("https://api.technohub.com.kg/store/callback/", data);
       reset();
-      alert("Форма успешно отправлена!");
+      toast.success("Форма успешно отправлена!", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
-      alert("Произошла ошибка при отправке формы.");
+      toast.error("Произошла ошибка при отправке формы.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "colored",
+      });
     }
   };
 
@@ -46,6 +56,7 @@ const Contact = () => {
 
   return (
     <>
+    <ToastContainer theme="colored" />
       <section className="pb-10">
         <div className="container">
           <div className="w-full py-2 md:px-5 px-0 md:py-10">
@@ -75,7 +86,7 @@ const Contact = () => {
                 `}</style>
 
                 {data?.map((el) => (
-                  <div key={el.id} className="flex">
+                  <div key={el.id} className="flex ">
                     <div className="flex">
                       <div className="flex flex-col items-start gap-1 px-3">
                         <TitleComponent>Наши контакты</TitleComponent>
