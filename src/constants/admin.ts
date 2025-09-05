@@ -1,5 +1,5 @@
 export const PHONE_NUMBER = ''
-export const PHONE_NUMBER_WHATSAPP = '996708771849'
+export const PHONE_NUMBER_WHATSAPP = '996773400551'
 
 
 
