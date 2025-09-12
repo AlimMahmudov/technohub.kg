@@ -155,7 +155,7 @@ const Discount = () => {
 						<SwiperSlide key={idx}>
 							<div>
 								<div className="bg-white flex flex-col gap-3 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md mx-[5px]">
-									<Link href={`/detail/${el.id}`}>
+									<Link href={`/detail/${el.slug}`}>
 										<div className="relative flex justify-end w-full h-[240px] rounded-[10px] overflow-hidden">
 											<Image
 												className="object-cover w-full h-full"

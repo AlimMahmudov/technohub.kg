@@ -263,7 +263,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
 							<div
 								key={el.id}
 								className="bg-white flex flex-col gap-1 justify-between rounded-[10px] border border-gray-200 p-3 shadow-md">
-								<Link href={`/detail/${el.id}`} className="flex flex-col gap-2">
+								<Link href={`/detail/${el.slug}`} className="flex flex-col gap-2">
 									<div className="relative flex justify-start w-full h-[240px] rounded-[10px] overflow-hidden">
 										<Image
 											className="object-cover w-full h-full"
