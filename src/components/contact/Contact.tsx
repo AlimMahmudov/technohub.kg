@@ -56,16 +56,16 @@ const Contact = () => {
 
   return (
     <>
-    <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" />
       <section className="pb-10">
         <div className="container">
           <div className="w-full py-2 md:px-5 px-0 md:py-10">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="w-full flex flex-col gap-1">
                 <div className="w-full flex flex-col gap-1 rounded-[10px] p-3">
-                  <p>свяжитесь с нами</p>
+                  <p>Свяжитесь с нами</p>
                   <Title>
-                    мы всегда готовы помочь вам и ответить на ваши вопросы
+                    Мы всегда готовы помочь вам и ответить на ваши вопросы...!
                   </Title>
                 </div>
 
@@ -89,33 +89,36 @@ const Contact = () => {
                   <div key={el.id} className="flex ">
                     <div className="flex">
                       <div className="flex flex-col items-start gap-1 px-3">
-                        <TitleComponent>Наши контакты</TitleComponent>
+                        <TitleComponent>Наши контакты:</TitleComponent>
                         {el.phone_number?.map((item) => (
                           <button key={item.id}>{item.phone_number}</button>
                         ))}
                       </div>
 
                       <div className="flex flex-col gap-1 px-3">
-                        <TitleComponent>Адрес офиса</TitleComponent>
+                        <TitleComponent>Адрес офиса:</TitleComponent>
                         <p>{el.address}</p>
                       </div>
 
                       <div className="flex flex-col gap-1 px-3">
-                        <TitleComponent>Соц. сети</TitleComponent>
-                        <div className="flex gap-2 text-[22px]">
+                        <TitleComponent>Соц. сети:</TitleComponent>
+                        <div className="flex gap-1 text-[22px]">
                           <Link
+                            className="bg-green-600 p-[5px] text-white rounded-[50px]"
                             target="_blank"
                             href={el.whatsapp[0]?.whatsapp || "#"}
                           >
                             <FaWhatsapp />
                           </Link>
                           <Link
+                            className="bg-pink-600 p-[5px] text-white rounded-[50px]"
                             target="_blank"
                             href={el.instagram[0]?.instagram || "#"}
                           >
                             <FaInstagram />
                           </Link>
                           <Link
+                            className="bg-blue-600 p-[5px] text-white rounded-[50px]"
                             target="_blank"
                             href={el.telegram[0]?.telegram || "#"}
                           >
