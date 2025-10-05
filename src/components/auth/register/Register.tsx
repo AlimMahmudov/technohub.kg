@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { Title } from "../../ui/text/Title";
 import { TitleComponent } from "../../ui/text/TitleComponent";
 import { Description } from "../../ui/text/Description";
-import { useRouter } from "next/navigation";
 import { PAGE } from "@/config/pages/public-page.config";
 
 interface RegisterForm {
@@ -23,7 +22,6 @@ const Register = () => {
   const { register, handleSubmit, reset } = useForm<RegisterForm>();
   const [registerUserMutation] = useRegisterUserMutation();
   const [loginUser] = useLoginUserMutation();
-  const route = useRouter();
 
   const success = () => {
     toast.success("🎉 Регистрация и вход выполнены!", {
@@ -65,7 +63,7 @@ const Register = () => {
 
       success();
       reset();
-      route.push(PAGE.HOME); // или любое другое нужное направление
+       window.location.href = PAGE.HOME;
     } catch (e) {
       console.error("❌ Ошибка при регистрации или логине:", e);
       error();
