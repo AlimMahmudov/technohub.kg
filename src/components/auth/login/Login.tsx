@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { Title } from "../../ui/text/Title";
 import { TitleComponent } from "../../ui/text/TitleComponent";
 import { Description } from "../../ui/text/Description";
@@ -20,7 +19,6 @@ const Login = () => {
 	const [loginUser] = useLoginUserMutation();
 
 	const { register, handleSubmit } = useForm<LoginFormData>();
-	const route = useRouter();
 
 	const success = () => {
 		toast.success("👋 Авторизация выполнена успешно!", {
