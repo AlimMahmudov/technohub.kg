@@ -55,7 +55,7 @@ const Login = () => {
 
 			console.log("✅ TOKENS SAVED");
 			success();
-			route.push(PAGE.HOME);
+			 window.location.href = PAGE.HOME;
 		} catch (e) {
 			console.error("❌ Login error:", e);
 			error();
