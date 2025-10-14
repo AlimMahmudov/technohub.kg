@@ -12,11 +12,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Распаковываем params из Promise
   const { slug } = await params;
-  
-  const res = await fetch(
-    `https://api.technohub.com.kg/store/laptop/${slug}`,
-    { next: { revalidate: 60 } }
-  );
+
+  const res = await fetch(`https://api.technohub.com.kg/store/laptop/${slug}`, {
+    next: { revalidate: 60 },
+  });
   const data: IDetail = await res.json();
 
   return generateSeoMetadata({
