@@ -23,6 +23,37 @@ export interface IDetail {
     id: number;
     image: string | null;
   }[];
+
+  printer_image?: {
+    id: number;
+    image: string;
+  }[];
+
   slug?: string;
   keys: string;
 }
+
+
+export interface ILaptopDetail {
+  id: number;
+  name: string;
+  articles: number;
+  laptop_image?: {
+    id: number;
+    image: string | null;
+  }[];
+  type: "laptop";
+}
+
+export interface IPrinterDetail {
+  id: number;
+  name: string;
+  articles: number;
+  printer_image?: {
+    id: number;
+    image: string;
+  };
+  type: "printer";
+}
+
+export type ProductDetail = ILaptopDetail | IPrinterDetail;

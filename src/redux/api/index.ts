@@ -58,7 +58,7 @@ export const api = createApi({
     "garantee",
     "auth",
     "service",
-    
+    "printers",
   ],
   refetchOnFocus: true,
   refetchOnReconnect: false,

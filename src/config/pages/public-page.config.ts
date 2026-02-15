@@ -1,5 +1,6 @@
 class PublicPage {
   HOME = "/";
+  PRINTERS = '/printers'
   ABOUT = "/about";
   DELIVERY = "/delivery";
   GARANTEE = "/garantee";

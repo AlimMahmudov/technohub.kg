@@ -11,6 +11,10 @@ export const navbar = [
     name: "Главное",
   },
   {
+    href: PAGE.PRINTERS,
+    name: "Принтеры",
+  },
+  {
     href: PAGE.ABOUT,
     name: "О нас",
   },

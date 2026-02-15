@@ -1,15 +1,15 @@
 // components/StructuredData.tsx
-'use client';
+"use client";
 
-import { generateStructuredData } from '@/lib/seo';
+import { generateStructuredData } from "@/lib/seo";
 
 export default function StructuredData() {
-    const structuredData = generateStructuredData();
-    
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-    );
+  const structuredData = generateStructuredData();
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
 }
