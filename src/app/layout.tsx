@@ -3,37 +3,38 @@ import localFont from "next/font/local";
 import "@/styles/globals.scss";
 import Providers from "./provider";
 import StructuredData from "@/components/StructuredData";
+import Image from "next/image";
 
 const geistSans = localFont({
-	src: "./fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-	weight: "100 900",
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
 });
 const geistMono = localFont({
-	src: "./fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-	weight: "100 900",
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-	title: "Technohub.kg",
-	description:
-		"Technohub.kg - магазин электроники в Кыргызстане. Ноутбуки, телефоны, техника по выгодным ценам.",
+  title: "Technohub.kg",
+  description:
+    "Technohub.kg - магазин электроники в Кыргызстане. Ноутбуки, телефоны, техника по выгодным ценам.",
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<head>
-				<StructuredData />
-				{/* Yandex.Metrika */}
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
+  return (
+    <html lang="en">
+      <head>
+        <StructuredData />
+        {/* Yandex.Metrika */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
 							(function(m,e,t,r,i,k,a){
 								m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 								m[i].l=1*new Date();
@@ -53,23 +54,25 @@ export default function RootLayout({
 								trackLinks:true
 							});
 						`,
-					}}
-				/>
-			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<Providers>{children}</Providers>
+          }}
+        />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>{children}</Providers>
 
-				{/* Yandex noscript */}
-				<noscript>
-					<div>
-						<img
-							src="https://mc.yandex.ru/watch/104026442"
-							style={{ position: "absolute", left: "-9999px" }}
-							alt=""
-						/>
-					</div>
-				</noscript>
-			</body>
-		</html>
-	);
+        {/* Yandex noscript */}
+        <noscript>
+          <div>
+            <Image
+              src="https://mc.yandex.ru/watch/104026442"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+      </body>
+    </html>
+  );
 }
