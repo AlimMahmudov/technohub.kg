@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BiSortAlt2 } from "react-icons/bi";
-import { FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
-import {
-  useGetBasketQuery,
-  useGetLaptopQuery,
-  usePostBasketMutation,
-  useUpdateQuantityMutation,
-} from "@/redux/api/laptop";
+import { useGetBasketQuery, useGetLaptopQuery } from "@/redux/api/laptop";
 
 import CardSkeleton from "@/components/skeleton/CardSkeleton";
 import { Name } from "@/components/ui/text/Name";
@@ -35,10 +28,6 @@ interface IContact {
 
 const Hero = ({ selectedFilters }: HeroProps) => {
   const { data, isLoading } = useGetLaptopQuery();
-  const { data: basketData } = useGetBasketQuery();
-
-  const [addToCart] = usePostBasketMutation();
-  const [updateQuantity] = useUpdateQuantityMutation();
 
   const [selectedCard, setSelectedCard] = useState<any>(null);
 
@@ -71,7 +60,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
             chat_id: process.env.NEXT_PUBLIC_TG_CHAT_ID,
             text: message,
           }),
-        }
+        },
       );
 
       toast.success("Заявка отправлена!");
@@ -127,27 +116,6 @@ const Hero = ({ selectedFilters }: HeroProps) => {
               >
                 Оставить заявку
               </button>
-
-              <button
-                onClick={() => {
-                  const existing = basketData?.find(
-                    (item) => item.product.id === el.id
-                  );
-
-                  if (existing) {
-                    updateQuantity({
-                      id: existing.id,
-                      product_id: el.id,
-                      quantity: existing.quantity + 1,
-                    });
-                  } else {
-                    addToCart({ product_id: el.id, quantity: 1 });
-                  }
-                }}
-                className="w-[50px] flex items-center justify-center bg-black text-white rounded-lg"
-              >
-                <FaShoppingCart />
-              </button>
             </div>
           </div>
         ))}
@@ -175,8 +143,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                 <div className="relative w-full h-[220px]">
                   <Image
                     src={
-                      selectedCard.laptop_image?.[0]?.image ||
-                      "/fallback.jpg"
+                      selectedCard.laptop_image?.[0]?.image || "/fallback.jpg"
                     }
                     fill
                     alt="product"
@@ -185,9 +152,7 @@ const Hero = ({ selectedFilters }: HeroProps) => {
                 </div>
 
                 <Name className="mt-2">{selectedCard.name}</Name>
-                <TitleComponent>
-                  {selectedCard.price} сом
-                </TitleComponent>
+                <TitleComponent>{selectedCard.price} сом</TitleComponent>
               </div>
 
               <form

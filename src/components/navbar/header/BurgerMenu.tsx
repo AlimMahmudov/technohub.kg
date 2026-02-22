@@ -4,8 +4,7 @@ import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
 import { navbar } from "@/lib/data";
 import { useState, useMemo } from "react";
-import { RiUserLine, RiResetLeftLine } from "react-icons/ri";
-import { PAGE } from "@/config/pages/public-page.config";
+import { RiResetLeftLine } from "react-icons/ri";
 import { useGetUserQuery, useLoautUserMutation } from "@/redux/api/auth";
 import { useGetLaptopQuery } from "@/redux/api/laptop";
 import { FaHdd, FaMemory, FaTags, FaWindows } from "react-icons/fa";
@@ -61,7 +60,7 @@ const BurgerMenu = ({
   const filters = useMemo(() => {
     const getUnique = <T,>(key: keyof (typeof filteredData)[0]): T[] =>
       Array.from(new Set(filteredData.map((item) => item[key] as T))).filter(
-        Boolean
+        Boolean,
       );
 
     return [
@@ -124,7 +123,6 @@ const BurgerMenu = ({
 
   const pathname = usePathname();
 
-
   return (
     <div
       id="menu-overlay"
@@ -141,7 +139,7 @@ const BurgerMenu = ({
       >
         {/* Верхняя часть: логин/профиль и закрытие меню */}
         <div className="flex justify-between items-center mt-6">
-          {!user ? (
+          {/* {!user ? (
             <button className="text-white flex text-[14px] bg-[#000000] p-1 px-2 justify-center items-center gap-2 rounded-[6px]">
               <Link className="flex items-center gap-1" href={PAGE.LOGIN}>
                 Войти <RiUserLine size={16} />
@@ -161,7 +159,8 @@ const BurgerMenu = ({
                 Выйти
               </button>
             </div>
-          )}
+          )} */}
+          <div className=""></div>
 
           <button
             onClick={() => setIsOpen(false)}
@@ -187,58 +186,59 @@ const BurgerMenu = ({
 
         {/* Фильтры */}
         {pathname === "/" && (
-        <div className="gap-3 w-full flex flex-col mt-4">
-          {filters.map((filter) => {
-            const isSectionOpen = openSections === filter.title;
-            return (
-              <div key={filter.title}>
-                <div
-                  className={`rounded-[6px] px-2 py-1 text-gray-800 flex items-center gap-3 cursor-pointer ${
-                    isSectionOpen ? "bg-[#cfcfcf]" : "bg-transparent"
-                  }`}
-                  onClick={() => toggleSection(filter.title)}
-                >
-                  <h1 className="font-normal text-[22px]">{filter.icon}</h1>
-                  <h1 className="font-normal text-[16px]">{filter.title}</h1>
+          <div className="gap-3 w-full flex flex-col mt-4">
+            {filters.map((filter) => {
+              const isSectionOpen = openSections === filter.title;
+              return (
+                <div key={filter.title}>
+                  <div
+                    className={`rounded-[6px] px-2 py-1 text-gray-800 flex items-center gap-3 cursor-pointer ${
+                      isSectionOpen ? "bg-[#cfcfcf]" : "bg-transparent"
+                    }`}
+                    onClick={() => toggleSection(filter.title)}
+                  >
+                    <h1 className="font-normal text-[22px]">{filter.icon}</h1>
+                    <h1 className="font-normal text-[16px]">{filter.title}</h1>
+                  </div>
+
+                  {isSectionOpen && (
+                    <ul className="px-3 py-1 space-y-1">
+                      {filter.options.map((option) => (
+                        <li key={option?.toString()}>
+                          <label className="flex items-center gap-2 font-normal text-[14px] text-gray-700">
+                            <input
+                              type="checkbox"
+                              checked={
+                                selectedFilters[filter.field]?.includes(
+                                  option,
+                                ) || false
+                              }
+                              onChange={() =>
+                                handleCheckboxChange(filter.field, option)
+                              }
+                            />
+                            {option}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
+              );
+            })}
 
-                {isSectionOpen && (
-                  <ul className="px-3 py-1 space-y-1">
-                    {filter.options.map((option) => (
-                      <li key={option?.toString()}>
-                        <label className="flex items-center gap-2 font-normal text-[14px] text-gray-700">
-                          <input
-                            type="checkbox"
-                            checked={
-                              selectedFilters[filter.field]?.includes(option) ||
-                              false
-                            }
-                            onChange={() =>
-                              handleCheckboxChange(filter.field, option)
-                            }
-                          />
-                          {option}
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+            {Object.values(selectedFilters).some((arr) => arr.length > 0) && (
+              <div
+                className="rounded-[6px] px-2 py-1 text-gray-800 flex items-center gap-3 cursor-pointer hover:bg-[#d8d8d8]"
+                onClick={() => setSelectedFilters({})}
+              >
+                <h1 className="font-normal text-[22px]">
+                  <RiResetLeftLine />
+                </h1>
+                <h1 className="font-normal text-[16px]">Сбросить фильтры</h1>
               </div>
-            );
-          })}
-
-          {Object.values(selectedFilters).some((arr) => arr.length > 0) && (
-            <div
-              className="rounded-[6px] px-2 py-1 text-gray-800 flex items-center gap-3 cursor-pointer hover:bg-[#d8d8d8]"
-              onClick={() => setSelectedFilters({})}
-            >
-              <h1 className="font-normal text-[22px]">
-                <RiResetLeftLine />
-              </h1>
-              <h1 className="font-normal text-[16px]">Сбросить фильтры</h1>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
         )}
       </div>
     </div>

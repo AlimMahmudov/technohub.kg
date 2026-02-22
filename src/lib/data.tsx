@@ -8,7 +8,7 @@ import { MdMemory, MdMonitor } from "react-icons/md";
 export const navbar = [
   {
     href: PAGE.HOME,
-    name: "Главное",
+    name: "Ноутбук",
   },
   {
     href: PAGE.PRINTERS,

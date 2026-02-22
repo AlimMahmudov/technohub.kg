@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiSortAlt2 } from "react-icons/bi";
-import { FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -47,33 +46,6 @@ const Printers = () => {
   /* =========================
         ADD TO BASKET
      ========================= */
-  const handleAddToBasket = (product: any) => {
-    const basket: IBasketItem[] = JSON.parse(
-      localStorage.getItem("basket") || "[]"
-    );
-
-    const existingIndex = basket.findIndex(
-      (item) => item.product_id === product.id
-    );
-
-    if (existingIndex !== -1) {
-      basket[existingIndex].quantity += 1;
-    } else {
-      basket.push({
-        product_id: product.id,
-        quantity: 1,
-        product: product,
-      });
-    }
-
-    localStorage.setItem("basket", JSON.stringify(basket));
-
-    toast.success("Товар добавлен в корзину", {
-      position: "top-right",
-      autoClose: 2000,
-      theme: "colored",
-    });
-  };
 
   /* =========================
         TELEGRAM SEND
@@ -104,7 +76,7 @@ const Printers = () => {
             text: message,
             parse_mode: "HTML",
           }),
-        }
+        },
       );
 
       reset();
@@ -138,13 +110,13 @@ const Printers = () => {
       result.sort(
         (a, b) =>
           new Date(b.created_date).getTime() -
-          new Date(a.created_date).getTime()
+          new Date(a.created_date).getTime(),
       );
     } else if (sortOldest) {
       result.sort(
         (a, b) =>
           new Date(a.created_date).getTime() -
-          new Date(b.created_date).getTime()
+          new Date(b.created_date).getTime(),
       );
     }
 
@@ -158,8 +130,7 @@ const Printers = () => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   if (isLoading) return <CardSkeleton />;
@@ -290,13 +261,6 @@ const Printers = () => {
               >
                 Оставить заявку
               </button>
-
-              <button
-                onClick={() => handleAddToBasket(el)}
-                className="w-[20%] flex items-center justify-center bg-black text-white rounded-[10px]"
-              >
-                <FaShoppingCart />
-              </button>
             </div>
           </div>
         ))}
@@ -313,9 +277,7 @@ const Printers = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold">
-                Покупка принтера
-              </h2>
+              <h2 className="text-xl font-semibold">Покупка принтера</h2>
               <button onClick={() => setSelectedCard(null)}>
                 <IoClose size={22} />
               </button>
@@ -326,8 +288,7 @@ const Printers = () => {
                 <div className="relative w-full h-[220px]">
                   <Image
                     src={
-                      selectedCard.printer_image?.[0]?.image ||
-                      "/fallback.jpg"
+                      selectedCard.printer_image?.[0]?.image || "/fallback.jpg"
                     }
                     fill
                     alt="printer"
@@ -335,13 +296,9 @@ const Printers = () => {
                   />
                 </div>
 
-                <Name className="mt-2">
-                  {selectedCard.name}
-                </Name>
+                <Name className="mt-2">{selectedCard.name}</Name>
 
-                <TitleComponent>
-                  {selectedCard.price} сом
-                </TitleComponent>
+                <TitleComponent>{selectedCard.price} сом</TitleComponent>
               </div>
 
               <form

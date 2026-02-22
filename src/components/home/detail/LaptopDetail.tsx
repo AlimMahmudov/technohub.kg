@@ -6,61 +6,12 @@ import Info from "./Info";
 import Specs from "./Specs";
 import BuyModal from "./BuyModal";
 import { Title } from "@/components/ui/text/Title";
-import { IoCartOutline } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 
 const LaptopDetail = ({ data }: { data: any }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* ================= ADD TO LOCAL STORAGE ================= */
-
-  const handleAddToCart = () => {
-    if (typeof window === "undefined") return;
-
-    const isAuthenticated = localStorage.getItem("access");
-
-    if (!isAuthenticated) {
-      toast.error(
-        "⚠️ Пожалуйста, авторизуйтесь перед добавлением в корзину",
-        {
-          position: "top-right",
-          autoClose: 4000,
-        }
-      );
-      return;
-    }
-
-    const existingBasket = JSON.parse(
-      localStorage.getItem("basket") || "[]"
-    );
-
-    const existingItem = existingBasket.find(
-      (item: any) => item.product_id === data.id
-    );
-
-    let updatedBasket;
-
-    if (existingItem) {
-      updatedBasket = existingBasket.map((item: any) =>
-        item.product_id === data.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-    } else {
-      updatedBasket = [
-        ...existingBasket,
-        {
-          product_id: data.id,
-          quantity: 1,
-          product: data,
-        },
-      ];
-    }
-
-    localStorage.setItem("basket", JSON.stringify(updatedBasket));
-
-    toast.success("Товар добавлен в корзину 🛒");
-  };
 
   return (
     <div className="container pt-[120px] pb-16">
@@ -79,30 +30,21 @@ const LaptopDetail = ({ data }: { data: any }) => {
 
             <div className="flex gap-3">
               <button
-                onClick={handleAddToCart}
-                className="py-3 rounded-xl w-full flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-900 transition"
-              >
-                <IoCartOutline size={20} />
-                В корзину
-              </button>
-
-              <button
                 onClick={() => {
                   const isAuthenticated =
                     typeof window !== "undefined" &&
                     localStorage.getItem("access");
 
                   if (!isAuthenticated) {
-                    toast.error(
-                      "⚠️ Пожалуйста, авторизуйтесь",
-                      { autoClose: 3000 }
-                    );
+                    toast.error("⚠️ Пожалуйста, авторизуйтесь", {
+                      autoClose: 3000,
+                    });
                     return;
                   }
 
                   setIsModalOpen(true);
                 }}
-                className="py-3 rounded-xl w-full flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-100 transition"
+                className="py-3 rounded-xl w-full flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-900 transition"
               >
                 Купить сейчас
               </button>

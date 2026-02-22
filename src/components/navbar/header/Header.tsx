@@ -6,8 +6,6 @@ import BurgerMenu from "./BurgerMenu";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { navbar } from "@/lib/data";
-import { IoCartOutline } from "react-icons/io5";
-import { RiUserLine } from "react-icons/ri";
 import { useGetUserQuery, useLoautUserMutation } from "@/redux/api/auth";
 import { useGetBasketQuery } from "@/redux/api/laptop";
 import Image from "next/image";
@@ -93,7 +91,7 @@ const Header = ({ selectedFilters, setSelectedFilters }: HeaderProps) => {
                 ))}
               </div>
 
-              <div className="flex gap-2 w-full max-w-[60px] md:max-w-[200px]   justify-end  ">
+              {/* <div className="flex gap-2 w-full max-w-[60px] md:max-w-[200px]   justify-end  ">
                 <div className=" relative">
                   <button className="text-white bg-[#64646469] p-2 text-[20px] rounded-[6px]">
                     <Link href={PAGE.BASKET}>
@@ -127,7 +125,7 @@ const Header = ({ selectedFilters, setSelectedFilters }: HeaderProps) => {
                     </button>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
