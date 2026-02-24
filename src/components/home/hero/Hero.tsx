@@ -96,12 +96,12 @@ const Hero = ({ selectedFilters }: HeroProps) => {
             className="bg-white border rounded-xl p-3 shadow-sm flex flex-col"
           >
             <Link href={`/detail/${el.slug}`}>
-              <div className="relative w-full h-[220px]">
+              <div className="relative w-full h-[300px]">
                 <Image
                   src={el.laptop_image?.[0]?.image || "/fallback.jpg"}
                   fill
                   alt="product"
-                  className="object-cover rounded-lg"
+                  className="object-contain rounded-lg"
                 />
               </div>
             </Link>

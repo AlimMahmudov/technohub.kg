@@ -20,7 +20,7 @@ const PrinterDetail = ({ data }: { data: any }) => {
       <div className="w-full py-5 md:px-5 flex flex-col gap-4 md:mb-[60px]">
         <Title>Подробнее о принтере</Title>
 
-        <div className="w-full mt-3 flex md:flex-row flex-col gap-6">
+        <div className="w-full mt-3 flex md:flex-row flex-col gap-6 ">
           {/* Галерея */}
           <Gallery images={data.printer_image} name={data.name} />
 
