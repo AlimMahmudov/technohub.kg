@@ -31,17 +31,6 @@ const LaptopDetail = ({ data }: { data: any }) => {
             <div className="flex gap-3">
               <button
                 onClick={() => {
-                  const isAuthenticated =
-                    typeof window !== "undefined" &&
-                    localStorage.getItem("access");
-
-                  if (!isAuthenticated) {
-                    toast.error("⚠️ Пожалуйста, авторизуйтесь", {
-                      autoClose: 3000,
-                    });
-                    return;
-                  }
-
                   setIsModalOpen(true);
                 }}
                 className="py-3 rounded-xl w-full flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-900 transition"
